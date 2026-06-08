@@ -29,9 +29,6 @@ python run.py single_thread
 python analysis/run_analysis.py "Experiments/<experiment_name>"
 ```
 
-Scripts no longer depend on the working directory — input and output paths are anchored to the
-repo root, so they run from any cwd.
-
 ## Documentation
 
 | Guide | Contents |
@@ -42,9 +39,6 @@ repo root, so they run from any cwd.
 | [docs/results.md](docs/results.md) | The on-disk results schema and the analysis pipeline |
 | [hpc/snellius_manual.md](hpc/snellius_manual.md) | Step-by-step SLURM + HyperQueue run procedure |
 | [hpc/experiment_setup.md](hpc/experiment_setup.md) | Computational budget (seeds, threads, walltime, node sizing) |
-
-For an architectural overview of the codebase (the `Config → Problem + Algorithm → evaluation
-loop → results` pipeline), see [CLAUDE.md](CLAUDE.md).
 
 ## Repository layout
 
