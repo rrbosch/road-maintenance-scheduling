@@ -1,0 +1,10 @@
+matplotlib==3.7.0
+numpy==1.24.3
+networkx~=3.1
+pandas~=2.0.3
+SQLAlchemy~=2.0.31
+pymoo~=0.6.0.1
+scipy~=1.11.1
+OpenMatrix~=0.3.5.0
+xgboost~=2.1.4
+scikit-learn~=1.5.0

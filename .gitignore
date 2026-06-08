@@ -1,0 +1,58 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# IDE / editor / assistant
+.idea/
+.vscode/
+.claude/
+
+# Old git history backup (created during the item-10 cleanup; delete when no longer needed)
+.git_OLD_backup/
+
+# Generated run output & analysis dirs
+Experiments/
+analysis/output/
+plots/
+/other/
+/results_processing/
+/results_processing_rerun/
+/results_processing_sensitivity/
+
+# Traffic-results caches (removed in favor of the in-memory FIFO cache)
+*.db
+*.db-shm
+*.db-wal
+*.zip
+
+# Scratch plot outputs from Environments/env/__main__ runs
+Environments/env/*.png
+
+# Generated ROOT-level artifacts only (root-anchored so Environments/input/** is untouched)
+/*.pdf
+/*.png
+/*.xlsx
+/*.docx
+/*.ilp
+/*.csv
+/_ul
+/to_do_experiments2.json
+/myfirstbash.sh
+
+# Excluded from the public repo: not needed to reproduce experiments (kept on disk).
+# Internal AI-assistant guidance / empty stub / unused label map.
+/CLAUDE.md
+/tno_dtp_api.py
+/legend.json
+# Legacy post-hoc analysis & plotting, superseded by the analysis/ package.
+/results_processing2.py
+/results_processing_old.py
+/visualize_networks.py
+Visualization/
+# Benchmark/scratch script, not part of the experiment pipeline.
+Environments/env/speed_test.py
+# TAP2021 reference-network DATA for other cities (experiments use Sioux Falls + Anaheim only);
+# the TAP2021 *.py helpers are kept.
+Environments/env/TAP2021/tntp_networks/
+Environments/env/TAP2021/processed_networks/

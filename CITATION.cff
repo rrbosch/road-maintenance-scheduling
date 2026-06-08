@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "Multi-objective scheduling of road-construction projects on a traffic network"
+abstract: >-
+  Research code for multi-objective scheduling of road-construction projects on a
+  traffic network. NSGA-II optimizes a Pareto set of schedules trading off expected
+  late-start risk (SL) against network-wide travel delay (TTD), using ML-predicted
+  lower bounds on TTD to prune the expensive traffic-assignment simulation.
+type: software
+authors:
+  - family-names: Bosch
+    given-names: Robbert
+    affiliation: "University of Twente"
+repository-code: "https://github.com/rrbosch/road-maintenance-scheduling"
+license: MIT
+keywords:
+  - multi-objective optimization
+  - NSGA-II
+  - traffic assignment
+  - road maintenance scheduling
+  - surrogate models
+version: "0.1.0"
+date-released: "2026-06-08"
