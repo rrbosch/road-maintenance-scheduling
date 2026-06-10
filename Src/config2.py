@@ -41,6 +41,18 @@ class Config:
         self.evaluator = 'ApproximateEvaluator'
         self.lower_bound = 'XGBoost'
         self.lower_bound_quantile = 0.2
+        # Centered quantile for the whole-schedule surrogate baseline (item 11 / E1,
+        # ScheduleSurrogateEvaluator). 0.5 = median => an unbiased point estimate, independent of
+        # the low lower_bound_quantile that PLBE uses for a sound bound.
+        self.schedule_surrogate_quantile = 0.5
+        # E2 (item 12) surrogate error-sensitivity tooling, both off by default:
+        #  * surrogate_noise: std of multiplicative relative noise injected into surrogate
+        #    predictions (0.0 = none) — sweep to map HV degradation vs. surrogate error.
+        #  * count_false_pruning: DIAGNOSTIC mode that exactly evaluates LB/surrogate-pruned
+        #    solutions to count how often pruning discards a truly non-dominated solution
+        #    (costs extra sims — for a few seeds only).
+        self.surrogate_noise = 0.0
+        self.count_false_pruning = False
         self.objectives = {'SL', 'TTD'}
         self.callback = 'OperatorSuccessCallback'
         self.start_time = datetime.now()
@@ -91,7 +103,10 @@ class Config:
     def set_problem(self):
         if self.problem == "Problem_py":
             from Environments.env.Problem import Problem_py
-            problem = Problem_py(self.case_study, self.sims, self.objectives, self.lower_bound, self.lower_bound_quantile, self.traffic_cache_size)
+            problem = Problem_py(self.case_study, self.sims, self.objectives, self.lower_bound,
+                                 self.lower_bound_quantile, self.traffic_cache_size,
+                                 self.schedule_surrogate_quantile, surrogate_noise=self.surrogate_noise,
+                                 count_false_pruning=self.count_false_pruning, seed=self.algo_seed)
         else:
             raise KeyError
         return problem
@@ -114,6 +129,12 @@ class Config:
                          seed=self.algo_seed, evaluator=evaluator, callback=callback)
             return algo
         elif 'Heuristic' in self.algo_name:
+            algo = registry.get(self.algo_name)(self)
+            return algo
+        elif 'Exact' in self.algo_name or 'BranchAndBound' in self.algo_name:
+            # Exact Pareto solvers (SF-9/SF-8 ground truth, item 16): the full-enumeration
+            # ExactParetoSolver and the branch-and-bound BranchAndBoundSolver. Both are one-shot;
+            # they take the config like the heuristic algorithms and expose get_res(env)/resume().
             algo = registry.get(self.algo_name)(self)
             return algo
         else:

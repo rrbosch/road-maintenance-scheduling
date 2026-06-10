@@ -126,8 +126,17 @@ def plot_surrogate_learning_curve(runs, out_dir):
                 continue
             any_data = True
             color, ls, label = style_for(run.config, idx)
-            ax.plot(s['n_computed'], s[metric], color=color, linestyle=ls,
-                    label=(label or run.label), marker='o', markersize=3)
+            base = label or run.label
+            # One line per surrogate model. Component (PLBE per-scenario lower bound) and schedule
+            # (item-11 whole-schedule baseline) are logged in the same surrogate.csv, distinguished
+            # by the 'model' column; older runs without it are treated as a single series.
+            if 'model' in s.columns and s['model'].nunique() > 1:
+                groups = [(f"{base} [{m}]", g) for m, g in s.groupby('model')]
+            else:
+                groups = [(base, s)]
+            for series_label, g in groups:
+                ax.plot(g['n_computed'], g[metric], color=color, linestyle=ls,
+                        label=series_label, marker='o', markersize=3)
         if not any_data:
             plt.close(fig)
             continue

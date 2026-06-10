@@ -27,15 +27,20 @@ supported** — overhaul item 7.)
 | File | Contents |
 |---|---|
 | `config.json` | Machine-readable run metadata (all `Config` attributes). Replaces the old `config.txt`. |
-| `progress.csv` | One row per generation: `iteration, time, time_cum, pareto_set_size, n_computed` + pruning diagnostics (`exact_evals, lb_pruned, scenarios_materialized, n_estimated`). |
+| `progress.csv` | One row per generation: `iteration, time, time_cum, pareto_set_size, n_computed` + pruning diagnostics (`exact_evals, lb_pruned, scenarios_materialized, n_estimated`, and `false_pruned` — nonzero only in the E2 `count_false_pruning` diagnostic mode). |
 | `fronts.csv` | Long format `generation,<obj0>,<obj1>` for **every** generation — the raw Pareto fronts, so any metric / reference point can be recomputed offline. |
 | `final_solutions.csv` | `sol_idx, x0..xN` — start-time vectors of the latest front (feeds the E3 schedule/Gantt interpretation). |
-| `surrogate.csv` | One row per regressor retrain: `n_computed, quantile, mape, pinball_loss` (the surrogate-accuracy learning curve). |
+| `surrogate.csv` | One row per regressor retrain: `n_computed, quantile, mape, pinball_loss, model` (the surrogate-accuracy learning curve). `model` is `component` (PLBE per-scenario lower bound) or `schedule` (the item-11 whole-schedule baseline). |
 | `algo.pkl` / `algo_backup.pkl` | Rolling pickles for crash-safe resume (atomic rotate). |
 | `output_log.txt` | Per-run log (when launched via `run_single_instance.py`). |
 
 `n_computed` is the **unique-simulations** counter (total traffic assignments run); it also paces
 regressor retraining (every +1000 assignments).
+
+> **`ExactParetoSolver` runs** write the same schema as a single "generation" (the exact true Pareto
+> front): `config.json`, `fronts.csv`, `final_solutions.csv`, `algo.pkl`, and a one-row
+> `progress.csv` with two extra columns — `total_enumerated` and `feasible`. There is **no**
+> `surrogate.csv`. The `analysis/` pipeline consumes these run dirs unchanged.
 
 ## Analyzing results
 

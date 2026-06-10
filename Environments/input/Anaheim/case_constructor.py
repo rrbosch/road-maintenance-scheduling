@@ -1,15 +1,18 @@
 """Construct the Anaheim road-construction case study.
 
 Mirrors `Sioux Falls Expanded/case_constructor.py` (same project-attribute methodology and
-settings) but, instead of one project per link, defines the projects as the **80 most
-congested road corridors** found by running a baseline traffic assignment.
+settings) but, instead of one project per link, defines the projects as the **80 highest-impact
+road corridors** (ranked by mean V/C x total volume) found by running a baseline traffic
+assignment.
 
 Pipeline:
   1. Load raw Anaheim net/trips (TNTP-derived) and node coordinates (geojson) from ./raw/.
   2. Run a baseline user-equilibrium assignment to get link flows.
   3. Drop centroid connectors (links touching zone nodes 1..N_ZONES), aggregate directed
      links into undirected roads, and merge contiguous non-branching roads into corridors.
-  4. Rank corridors by mean volume/capacity and keep the top N_PROJECTS.
+  4. Rank corridors by (mean volume/capacity) x (total volume) and keep the top N_PROJECTS.
+     This product targets corridors that are both congested and heavily used, i.e. where
+     crippling the link for construction has the largest network travel-delay impact.
   5. Generate per-project attributes (duration, hard due date, k/p decay, cost) and the
      network-level general.csv exactly as the SFE constructor does.
   6. Write general.csv, projects.csv, project_links.csv, net.csv, nodes.csv, trips.csv here.
@@ -140,13 +143,19 @@ def build_corridors(net, nodes, trips):
 
     rows = []
     for members in corr.values():
-        vcs = [roads[m]['vc'] for m in members]
+        vc_mean = float(np.mean([roads[m]['vc'] for m in members]))
+        vol_total = float(sum(roads[m]['vol'] for m in members))
         links = [lk for m in members for lk in roads[m]['links']]
-        rows.append({'vc_mean': float(np.mean(vcs)), 'n_seg': len(members),
+        # Rank by V/C x volume: a corridor's marginal travel-delay impact when crippled grows with
+        # both how saturated it is (BPR is convex in V/C) and how many vehicles it carries, so the
+        # product targets the corridors where construction timing moves the TTD objective most.
+        rows.append({'vc_mean': vc_mean, 'vol_total': vol_total,
+                     'score': vc_mean * vol_total, 'n_seg': len(members),
                      'affected links': tuple(links)})
-    cdf = pd.DataFrame(rows).sort_values('vc_mean', ascending=False).reset_index(drop=True)
+    cdf = pd.DataFrame(rows).sort_values('score', ascending=False).reset_index(drop=True)
     print(f"roads={len(roads)} -> corridors={len(cdf)}; "
-          f"top-{N_PROJECTS} V/C cutoff={cdf.loc[N_PROJECTS-1, 'vc_mean']:.3f}")
+          f"top-{N_PROJECTS} V/Cxvol cutoff={cdf.loc[N_PROJECTS-1, 'score']:.1f} "
+          f"(V/C={cdf.loc[N_PROJECTS-1, 'vc_mean']:.3f}, vol={cdf.loc[N_PROJECTS-1, 'vol_total']:.0f})")
     return cdf.head(N_PROJECTS).reset_index(drop=True)
 
 

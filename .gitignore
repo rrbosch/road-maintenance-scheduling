@@ -11,6 +11,10 @@ __pycache__/
 # Old git history backup (created during the item-10 cleanup; delete when no longer needed)
 .git_OLD_backup/
 
+# Scratch / non-core-library files relocated here (throwaway scripts, legacy plotting,
+# generated figures, debug artifacts). Not part of the published library.
+temp/
+
 # Generated run output & analysis dirs
 Experiments/
 analysis/output/

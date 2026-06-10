@@ -77,6 +77,7 @@ class NSGA2(NSGA2lib):
                 'lb_pruned': getattr(ev, 'n_lb_pruned', 0),
                 'scenarios_materialized': getattr(ev, 'n_scenarios_materialized', 0),
                 'n_estimated': getattr(ev, 'n_estimated', 0),
+                'false_pruned': getattr(ev, 'n_false_pruned', 0),  # E2 diagnostic (0 unless enabled)
             })
             print(f'[{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}] {self.config.results_dir}')
             print(self.log[-1])
