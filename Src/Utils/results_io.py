@@ -13,14 +13,32 @@ old per-generation ``F_<gen>.csv``/``X_<gen>.csv`` explosion:
 ``progress.csv`` and ``final_solutions.csv`` are rewritten in full each generation (cheap, and
 resume-safe because they derive from the pickled ``algo``); ``fronts.csv``/``surrogate.csv`` are
 appended.
+
+The full-rewrite files are written **atomically** (temp file + ``os.replace``): a plain in-place
+``to_csv`` truncates the target the instant it opens, so a kill mid-write (e.g. a SLURM walltime
+SIGKILL) would leave an empty/partial file. Writing a sibling temp and atomically renaming means an
+interrupted write leaves the previous good file untouched.
 """
 import json
+import os
 import pickle
 import shutil
 from os import path
 
 import numpy as np
 import pandas as pd
+
+
+def _atomic_write_csv(df, target):
+    """Write ``df`` to ``target`` atomically: full temp file in the same dir, then ``os.replace``.
+
+    ``os.replace`` is atomic on the local filesystem and overwrites the destination, so a crash
+    during the write only ever leaves the (complete) prior ``target`` or the orphan temp — never a
+    truncated ``target``. Mirrors the temp-then-move pattern in :func:`save_algo_pickle`.
+    """
+    temp = target + '.tmp'
+    df.to_csv(temp, index=False)
+    os.replace(temp, target)
 
 
 def _jsonable(v):
@@ -78,12 +96,12 @@ def write_final_solutions(result_dir, X):
     X = np.atleast_2d(np.asarray(X))
     df = pd.DataFrame(X, columns=[f'x{i}' for i in range(X.shape[1])])
     df.insert(0, 'sol_idx', range(X.shape[0]))
-    df.to_csv(path.join(result_dir, 'final_solutions.csv'), index=False)
+    _atomic_write_csv(df, path.join(result_dir, 'final_solutions.csv'))
 
 
 def write_progress(result_dir, log):
     """(Re)write progress.csv in full from the cumulative per-generation log list."""
-    pd.DataFrame(log).to_csv(path.join(result_dir, 'progress.csv'), index=False)
+    _atomic_write_csv(pd.DataFrame(log), path.join(result_dir, 'progress.csv'))
 
 
 def append_surrogate(result_dir, rows):
