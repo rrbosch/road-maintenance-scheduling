@@ -57,9 +57,23 @@ START=$(( SLURM_ARRAY_TASK_ID * BUNDLE ))
 
 echo "[array ${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}] running experiments ${START}..$(( START + BUNDLE - 1 )) of ${N}"
 
+# Pin each run to a core SLURM ACTUALLY allocated to this job. A shared Snellius job's cgroup
+# cpuset is rarely the absolute ids 0..15, so the old `taskset -c $k` failed with
+# "Invalid argument" and taskset then refused to exec python -> most experiments never launched.
+# Read the allowed set (os.sched_getaffinity honours the cgroup) and pin to its k-th member.
+mapfile -t CPUS < <(python -c "import os; print('\n'.join(map(str, sorted(os.sched_getaffinity(0)))))")
+NCPU=${#CPUS[@]}
+echo "[array ${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}] allocated ${NCPU} CPUs: ${CPUS[*]}"
+
 for k in $(seq 0 $(( BUNDLE - 1 ))); do
   EID=$(( START + k ))
   [ "$EID" -ge "$N" ] && break
-  taskset -c "$k" python hpc/run_task.py --expe_id="$EID" --json_file=hpc/registry.json &
+  if [ "$k" -lt "$NCPU" ]; then
+    taskset -c "${CPUS[$k]}" python hpc/run_task.py --expe_id="$EID" --json_file=hpc/registry.json &
+  else
+    # more bundled runs than allocated cores (shouldn't happen with BUNDLE=cpus-per-task);
+    # let the kernel schedule it within the cgroup rather than failing.
+    python hpc/run_task.py --expe_id="$EID" --json_file=hpc/registry.json &
+  fi
 done
 wait

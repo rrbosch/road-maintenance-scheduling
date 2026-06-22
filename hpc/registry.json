@@ -1,17 +1,8 @@
 [
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 0
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -19,19 +10,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 0
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -39,9 +20,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -49,18 +30,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 0
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -68,19 +40,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 0
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -88,9 +50,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -98,34 +60,25 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "StandardEvaluator",
             "algo_seed": 0
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ScheduleSurrogateEvaluator",
             "algo_seed": 0
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 1
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -133,19 +86,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 1
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -153,9 +96,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -163,18 +106,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 1
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -182,19 +116,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 1
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -202,9 +126,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -212,34 +136,25 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "StandardEvaluator",
             "algo_seed": 1
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ScheduleSurrogateEvaluator",
             "algo_seed": 1
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 2
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -247,19 +162,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 2
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -267,9 +172,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -277,18 +182,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 2
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -296,19 +192,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 2
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -316,9 +202,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -326,34 +212,25 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "StandardEvaluator",
             "algo_seed": 2
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ScheduleSurrogateEvaluator",
             "algo_seed": 2
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 3
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -361,19 +238,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 3
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -381,9 +248,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -391,18 +258,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 3
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -410,19 +268,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 3
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -430,9 +278,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -440,34 +288,25 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "StandardEvaluator",
             "algo_seed": 3
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ScheduleSurrogateEvaluator",
             "algo_seed": 3
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 4
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -475,19 +314,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 4
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -495,9 +324,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -505,18 +334,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 4
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -524,19 +344,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 4
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -544,9 +354,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -554,34 +364,25 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "StandardEvaluator",
             "algo_seed": 4
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ScheduleSurrogateEvaluator",
             "algo_seed": 4
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 5
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -589,19 +390,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 5
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -609,9 +400,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -619,18 +410,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 5
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -638,19 +420,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 5
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -658,9 +430,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -668,34 +440,25 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "StandardEvaluator",
             "algo_seed": 5
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ScheduleSurrogateEvaluator",
             "algo_seed": 5
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 6
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -703,19 +466,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 6
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -723,9 +476,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -733,18 +486,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 6
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -752,19 +496,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 6
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -772,9 +506,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -782,34 +516,25 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "StandardEvaluator",
             "algo_seed": 6
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ScheduleSurrogateEvaluator",
             "algo_seed": 6
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 7
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -817,19 +542,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 7
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -837,9 +552,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -847,18 +562,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 7
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -866,19 +572,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 7
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -886,9 +582,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -896,34 +592,25 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "StandardEvaluator",
             "algo_seed": 7
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ScheduleSurrogateEvaluator",
             "algo_seed": 7
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 8
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -931,19 +618,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 8
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -951,9 +628,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -961,18 +638,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 8
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -980,19 +648,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 8
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -1000,9 +658,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -1010,34 +668,25 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "StandardEvaluator",
             "algo_seed": 8
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ScheduleSurrogateEvaluator",
             "algo_seed": 8
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 9
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -1045,19 +694,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 9
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -1065,9 +704,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -1075,18 +714,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 9
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -1094,19 +724,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 9
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -1114,9 +734,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -1124,34 +744,25 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "StandardEvaluator",
             "algo_seed": 9
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ScheduleSurrogateEvaluator",
             "algo_seed": 9
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 10
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -1159,19 +770,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 10
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -1179,9 +780,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -1189,18 +790,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 10
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -1208,19 +800,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 10
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -1228,9 +810,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -1238,34 +820,25 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "StandardEvaluator",
             "algo_seed": 10
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ScheduleSurrogateEvaluator",
             "algo_seed": 10
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 11
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -1273,19 +846,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 11
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -1293,9 +856,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -1303,18 +866,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 11
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -1322,19 +876,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 11
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -1342,9 +886,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -1352,34 +896,25 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "StandardEvaluator",
             "algo_seed": 11
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ScheduleSurrogateEvaluator",
             "algo_seed": 11
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 12
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -1387,19 +922,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 12
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -1407,9 +932,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -1417,18 +942,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 12
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -1436,19 +952,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 12
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -1456,9 +962,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -1466,34 +972,25 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "StandardEvaluator",
             "algo_seed": 12
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ScheduleSurrogateEvaluator",
             "algo_seed": 12
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 13
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -1501,19 +998,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 13
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -1521,9 +1008,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -1531,18 +1018,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 13
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -1550,19 +1028,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 13
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -1570,9 +1038,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -1580,34 +1048,25 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "StandardEvaluator",
             "algo_seed": 13
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ScheduleSurrogateEvaluator",
             "algo_seed": 13
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 14
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -1615,19 +1074,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 14
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -1635,9 +1084,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -1645,18 +1094,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 14
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -1664,19 +1104,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 14
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -1684,9 +1114,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -1694,34 +1124,25 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "StandardEvaluator",
             "algo_seed": 14
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ScheduleSurrogateEvaluator",
             "algo_seed": 14
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 15
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -1729,19 +1150,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 15
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -1749,9 +1160,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -1759,18 +1170,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 15
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -1778,19 +1180,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 15
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -1798,9 +1190,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -1808,34 +1200,25 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "StandardEvaluator",
             "algo_seed": 15
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ScheduleSurrogateEvaluator",
             "algo_seed": 15
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 16
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -1843,19 +1226,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 16
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -1863,9 +1236,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -1873,18 +1246,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 16
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -1892,19 +1256,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 16
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -1912,9 +1266,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -1922,34 +1276,25 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "StandardEvaluator",
             "algo_seed": 16
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ScheduleSurrogateEvaluator",
             "algo_seed": 16
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 17
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -1957,19 +1302,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 17
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -1977,9 +1312,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -1987,18 +1322,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 17
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -2006,19 +1332,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 17
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -2026,9 +1342,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -2036,34 +1352,25 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "StandardEvaluator",
             "algo_seed": 17
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ScheduleSurrogateEvaluator",
             "algo_seed": 17
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 18
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -2071,19 +1378,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 18
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -2091,9 +1388,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -2101,18 +1398,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 18
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -2120,19 +1408,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 18
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -2140,9 +1418,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -2150,34 +1428,25 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "StandardEvaluator",
             "algo_seed": 18
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ScheduleSurrogateEvaluator",
             "algo_seed": 18
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 19
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -2185,19 +1454,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 19
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -2205,9 +1464,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -2215,18 +1474,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 19
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -2234,19 +1484,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 19
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -2254,9 +1494,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -2264,34 +1504,25 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "StandardEvaluator",
             "algo_seed": 19
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ScheduleSurrogateEvaluator",
             "algo_seed": 19
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 20
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -2299,19 +1530,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 20
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -2319,9 +1540,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -2329,18 +1550,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 20
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -2348,19 +1560,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 20
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -2368,9 +1570,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -2378,34 +1580,25 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "StandardEvaluator",
             "algo_seed": 20
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ScheduleSurrogateEvaluator",
             "algo_seed": 20
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 21
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -2413,19 +1606,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 21
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -2433,9 +1616,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -2443,18 +1626,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 21
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -2462,19 +1636,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 21
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -2482,9 +1646,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -2492,34 +1656,25 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "StandardEvaluator",
             "algo_seed": 21
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ScheduleSurrogateEvaluator",
             "algo_seed": 21
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 22
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -2527,19 +1682,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 22
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -2547,9 +1692,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -2557,18 +1702,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 22
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -2576,19 +1712,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 22
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -2596,9 +1722,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -2606,34 +1732,25 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "StandardEvaluator",
             "algo_seed": 22
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ScheduleSurrogateEvaluator",
             "algo_seed": 22
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 23
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -2641,19 +1758,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 23
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -2661,9 +1768,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -2671,18 +1778,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 23
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -2690,19 +1788,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 23
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -2710,9 +1798,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -2720,34 +1808,25 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "StandardEvaluator",
             "algo_seed": 23
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ScheduleSurrogateEvaluator",
             "algo_seed": 23
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 24
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -2755,19 +1834,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 24
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -2775,9 +1844,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -2785,18 +1854,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 24
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -2804,19 +1864,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 24
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -2824,9 +1874,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -2834,34 +1884,25 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "StandardEvaluator",
             "algo_seed": 24
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ScheduleSurrogateEvaluator",
             "algo_seed": 24
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 25
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -2869,19 +1910,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 25
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -2889,9 +1920,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -2899,18 +1930,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 25
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -2918,19 +1940,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 25
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -2938,9 +1950,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -2948,34 +1960,25 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "StandardEvaluator",
             "algo_seed": 25
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ScheduleSurrogateEvaluator",
             "algo_seed": 25
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 26
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -2983,19 +1986,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 26
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -3003,9 +1996,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -3013,18 +2006,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 26
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -3032,19 +2016,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 26
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -3052,9 +2026,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -3062,34 +2036,25 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "StandardEvaluator",
             "algo_seed": 26
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ScheduleSurrogateEvaluator",
             "algo_seed": 26
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 27
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -3097,19 +2062,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 27
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -3117,9 +2072,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -3127,18 +2082,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 27
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -3146,19 +2092,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 27
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -3166,9 +2102,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -3176,34 +2112,25 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "StandardEvaluator",
             "algo_seed": 27
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ScheduleSurrogateEvaluator",
             "algo_seed": 27
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 28
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -3211,19 +2138,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 28
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -3231,9 +2148,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -3241,18 +2158,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 28
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -3260,19 +2168,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 28
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -3280,9 +2178,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -3290,34 +2188,25 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "StandardEvaluator",
             "algo_seed": 28
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ScheduleSurrogateEvaluator",
             "algo_seed": 28
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 29
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -3325,19 +2214,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "LowerBoundEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 29
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -3345,9 +2224,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "LowerBoundEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -3355,18 +2234,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "Heuristic",
-            "algo_seed": 29
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.05,
@@ -3374,19 +2244,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
-            "evaluator": "ApproximateEvaluator",
-            "lower_bound": "XGBoost",
-            "lower_bound_quantile": 0.1,
-            "algo_seed": 29
-        }
-    },
-    {
-        "experiment_name": "E1 SF-12",
-        "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.2,
@@ -3394,9 +2254,9 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ApproximateEvaluator",
             "lower_bound": "XGBoost",
             "lower_bound_quantile": 0.5,
@@ -3404,17 +2264,17 @@
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "StandardEvaluator",
             "algo_seed": 29
         }
     },
     {
-        "experiment_name": "E1 SF-12",
+        "experiment_name": "E2 SF-76",
         "parameters": {
-            "case_study": "Sioux Falls 12",
+            "case_study": "Sioux Falls Expanded",
             "evaluator": "ScheduleSurrogateEvaluator",
             "algo_seed": 29
         }

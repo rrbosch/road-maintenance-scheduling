@@ -119,8 +119,6 @@ if __name__ == "__main__":
     parameters = [{'algo_name': 'WeightedSlackHeuristic'}]
     generate_experiment_runs(experiment_name, parameters, [i for i in range(1)])
     """
-    # ---- E1 on SF-12: standard NSGA-II vs. PLBE variants vs. out-of-the-box SAEA ----
-    # 12 algorithm configurations x 30 seeds = 360 runs (all single-threaded, 24 h TIME_BUDGET).
     # Shorthand (see ../CLAUDE.md "Experiment campaign"): <evaluator>|<surrogate>|<quantile>.
     #   * EP|*  -> LowerBoundEvaluator   (Elimination-Pruning PLBE)
     #   * LE|*  -> ApproximateEvaluator  (Lazy-Eval PLBE)
@@ -129,22 +127,41 @@ if __name__ == "__main__":
     #   * S|-|- -> StandardEvaluator         (the control: plain NSGA-II, exact every eval)
     #   * SS|X|0.5 -> ScheduleSurrogateEvaluator (out-of-the-box SAEA: whole-schedule XGBoost
     #                 surrogate, median pre-selection; schedule_surrogate_quantile defaults to 0.5)
-    experiment_name = 'E1 SF-12'
-    case_study = 'Sioux Falls 12'
-    parameters = []
-    for evaluator in ['LowerBoundEvaluator', 'ApproximateEvaluator']:        # EP, LE
-        parameters.append({'case_study': case_study,
-                           'evaluator': evaluator,
-                           'lower_bound': 'Heuristic'})                       # *|H|-
-        for lower_bound_quantile in [0.05, 0.1, 0.2, 0.5]:                    # *|X|q
-            parameters.append({'case_study': case_study,
-                               'evaluator': evaluator,
-                               'lower_bound': 'XGBoost',
-                               'lower_bound_quantile': lower_bound_quantile})
-    parameters.append({'case_study': case_study,
-                       'evaluator': 'StandardEvaluator'})                     # S|-|-  (control)
-    parameters.append({'case_study': case_study,
-                       'evaluator': 'ScheduleSurrogateEvaluator'})            # SS|X|0.5 (SAEA)
+    #
+    # ---- E1 on SF-12 (DONE) ----
+    # Full 12-config grid (EP/LE x {XGBoost@{0.05,0.1,0.2,0.5}, Heuristic} + S|-|- + SS|X|0.5) x
+    # 30 seeds = 360 runs. Its registry is archived as hpc/registry_exp0.json and the grid code is
+    # in git history. Result: best PLBE variant = EP|X|0.2 (LowerBoundEvaluator, XGBoost, q=0.2),
+    # carried forward as the PLBE arm of E2-E4 (see ../EXPERIMENTS.md).
+
+    # ---- E2 on SF-76 (Sioux Falls Expanded): headline efficiency + EP-vs-LE + SAEA at scale ----
+    # 8 configs x 30 seeds = 240 runs (single-threaded, 24 h TIME_BUDGET). Native-array dispatch:
+    #   sbatch --array=0-14 hpc/submit_array.sh        # ceil(240/16)-1 = 14
+    # PLBE arms: both EP (LowerBoundEvaluator) and LE (ApproximateEvaluator) swept at the SAME
+    # q in {0.05,0.2,0.5}, giving matched EP-vs-LE pairs at every quantile (0.2 = headline EP|X|0.2).
+    # Plus the S|-|- control and SS|X|0.5 SAEA.
+    experiment_name = 'E2 SF-76'
+    case_study = 'Sioux Falls Expanded'
+    parameters = [
+        # PLBE -- Elimination-Pruning (EP), XGBoost quantile sweep (0.2 = best-E1 PLBE)
+        {'case_study': case_study, 'evaluator': 'LowerBoundEvaluator',
+         'lower_bound': 'XGBoost', 'lower_bound_quantile': 0.05},              # EP|X|0.05
+        {'case_study': case_study, 'evaluator': 'LowerBoundEvaluator',
+         'lower_bound': 'XGBoost', 'lower_bound_quantile': 0.2},               # EP|X|0.2  (best-E1 PLBE)
+        {'case_study': case_study, 'evaluator': 'LowerBoundEvaluator',
+         'lower_bound': 'XGBoost', 'lower_bound_quantile': 0.5},               # EP|X|0.5
+        # PLBE -- Lazy-Eval (LE), XGBoost quantile sweep -- identical to the EP arm for a direct
+        # elimination-pruning-vs-lazy-eval comparison at every quantile
+        {'case_study': case_study, 'evaluator': 'ApproximateEvaluator',
+         'lower_bound': 'XGBoost', 'lower_bound_quantile': 0.05},              # LE|X|0.05
+        {'case_study': case_study, 'evaluator': 'ApproximateEvaluator',
+         'lower_bound': 'XGBoost', 'lower_bound_quantile': 0.2},               # LE|X|0.2  (best LE)
+        {'case_study': case_study, 'evaluator': 'ApproximateEvaluator',
+         'lower_bound': 'XGBoost', 'lower_bound_quantile': 0.5},               # LE|X|0.5
+        # Baselines
+        {'case_study': case_study, 'evaluator': 'StandardEvaluator'},          # S|-|-    (control)
+        {'case_study': case_study, 'evaluator': 'ScheduleSurrogateEvaluator'}, # SS|X|0.5 (SAEA)
+    ]
     algo_seeds = [i for i in range(30)]
 
     generate_experiment_runs(experiment_name, parameters, algo_seeds)
