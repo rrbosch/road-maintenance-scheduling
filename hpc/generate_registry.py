@@ -130,38 +130,43 @@ if __name__ == "__main__":
     #
     # ---- E1 on SF-12 (DONE) ----
     # Full 12-config grid (EP/LE x {XGBoost@{0.05,0.1,0.2,0.5}, Heuristic} + S|-|- + SS|X|0.5) x
-    # 30 seeds = 360 runs. Its registry is archived as hpc/registry_exp0.json and the grid code is
+    # 30 seeds = 360 runs. Its registry is archived as hpc/registry_E1.json and the grid code is
     # in git history. Result: best PLBE variant = EP|X|0.2 (LowerBoundEvaluator, XGBoost, q=0.2),
     # carried forward as the PLBE arm of E2-E4 (see ../EXPERIMENTS.md).
 
-    # ---- E2 on SF-76 (Sioux Falls Expanded): headline efficiency + EP-vs-LE + SAEA at scale ----
-    # 8 configs x 30 seeds = 240 runs (single-threaded, 24 h TIME_BUDGET). Native-array dispatch:
-    #   sbatch --array=0-14 hpc/submit_array.sh        # ceil(240/16)-1 = 14
-    # PLBE arms: both EP (LowerBoundEvaluator) and LE (ApproximateEvaluator) swept at the SAME
-    # q in {0.05,0.2,0.5}, giving matched EP-vs-LE pairs at every quantile (0.2 = headline EP|X|0.2).
-    # Plus the S|-|- control and SS|X|0.5 SAEA.
-    experiment_name = 'E2 SF-76'
-    case_study = 'Sioux Falls Expanded'
-    parameters = [
-        # PLBE -- Elimination-Pruning (EP), XGBoost quantile sweep (0.2 = best-E1 PLBE)
-        {'case_study': case_study, 'evaluator': 'LowerBoundEvaluator',
-         'lower_bound': 'XGBoost', 'lower_bound_quantile': 0.05},              # EP|X|0.05
-        {'case_study': case_study, 'evaluator': 'LowerBoundEvaluator',
-         'lower_bound': 'XGBoost', 'lower_bound_quantile': 0.2},               # EP|X|0.2  (best-E1 PLBE)
-        {'case_study': case_study, 'evaluator': 'LowerBoundEvaluator',
-         'lower_bound': 'XGBoost', 'lower_bound_quantile': 0.5},               # EP|X|0.5
-        # PLBE -- Lazy-Eval (LE), XGBoost quantile sweep -- identical to the EP arm for a direct
-        # elimination-pruning-vs-lazy-eval comparison at every quantile
-        {'case_study': case_study, 'evaluator': 'ApproximateEvaluator',
-         'lower_bound': 'XGBoost', 'lower_bound_quantile': 0.05},              # LE|X|0.05
-        {'case_study': case_study, 'evaluator': 'ApproximateEvaluator',
-         'lower_bound': 'XGBoost', 'lower_bound_quantile': 0.2},               # LE|X|0.2  (best LE)
-        {'case_study': case_study, 'evaluator': 'ApproximateEvaluator',
-         'lower_bound': 'XGBoost', 'lower_bound_quantile': 0.5},               # LE|X|0.5
-        # Baselines
-        {'case_study': case_study, 'evaluator': 'StandardEvaluator'},          # S|-|-    (control)
-        {'case_study': case_study, 'evaluator': 'ScheduleSurrogateEvaluator'}, # SS|X|0.5 (SAEA)
+    # ---- E2 on SF-76 (DONE) ----
+    # 8 configs (EP/LE x q in {0.05,0.2,0.5} + S|-|- + SS|X|0.5) x 30 seeds = 240 runs on Sioux
+    # Falls Expanded; registry archived as hpc/registry_E2.json. Result: PLBE dominates the Standard
+    # front entirely and the SAEA front ~96% (two-set coverage), at ~85-89% fewer simulations; EP ~
+    # LE; EP|X|0.2 is the balanced pick (see ../EXPERIMENTS.md).
+
+    # ---- E3 on SF-76 variants: robustness across network structure / parameters ----
+    # The headline trio -- best PLBE (EP|X|0.2) vs the S|-|- control vs the SS|X|0.5 SAEA -- across
+    # 7 SF-76 variant networks x 30 seeds = 3 x 7 x 30 = 630 runs. Native-array dispatch:
+    #   sbatch --array=0-39 hpc/submit_array.sh        # ceil(630/16)-1 = 39
+    # (To also sweep EP-vs-LE / quantiles per variant, extend `configs` below -- but that multiplies
+    #  the run count; E2 already established EP~LE and the quantile trade-off, so E3 keeps the trio.)
+    experiment_name = 'E3 SF-76 variants'
+    variants = [
+        'Sioux Falls road capacity 0.9',
+        'Sioux Falls road capacity 1.1',
+        'Sioux Falls road capacity 100',
+        'Sioux Falls construction capacity 0.7',
+        'Sioux Falls construction capacity 100',
+        'Sioux Falls Less Connected',
+        'Sioux Falls More Connected',
     ]
+    configs = [
+        {'evaluator': 'LowerBoundEvaluator', 'lower_bound': 'XGBoost', 'lower_bound_quantile': 0.2},  # EP|X|0.2
+        {'evaluator': 'StandardEvaluator'},                                                           # S|-|-
+        {'evaluator': 'ScheduleSurrogateEvaluator'},                                                  # SS|X|0.5
+    ]
+    parameters = []
+    for cs in variants:
+        for c in configs:
+            entry = {'case_study': cs}
+            entry.update(c)
+            parameters.append(entry)
     algo_seeds = [i for i in range(30)]
 
     generate_experiment_runs(experiment_name, parameters, algo_seeds)
