@@ -29,6 +29,9 @@ class NSGA2(NSGA2lib):
         self.ready = False
         self.log = []
         self.elapsed_time = 0
+        # Last generation appended to fronts.csv (pickled with the algo so it survives resume;
+        # used to stride front logging and to guard the post-loop final-front write against dups).
+        self._last_fronts_gen = None
 
     def get_res(self, env):
         """Run the manual NSGA-II loop until the wall-clock budget, writing results each generation."""
@@ -43,6 +46,9 @@ class NSGA2(NSGA2lib):
 
         # Run for up to 24h of accumulated compute (survives resume via self.elapsed_time).
         TIME_BUDGET = 24*3600
+        # Stride for appending the (large) cumulative front to fronts.csv; the final front is always
+        # written after the loop. getattr keeps resumed algos with an older pickled config working.
+        fronts_interval = getattr(self.config, 'fronts_log_interval', 10)
         while self.elapsed_time < TIME_BUDGET:
             # neutralize pymoo's own termination so only the time budget stops us
             self.termination.perc = 0  # This is not temp
@@ -100,10 +106,17 @@ class NSGA2(NSGA2lib):
                 self._n_surrogate_written = len(ttd.surrogate_log)
 
             if F is not None and len(F) > 0:
+                # Stride the front log; also force the very first logged generation so fronts.csv
+                # exists early (analysis skips runs without it). The pickle/progress/surrogate
+                # inside write_generation are written every generation regardless.
+                write_fronts = (gen % fronts_interval == 0) or (self._last_fronts_gen is None)
                 results_io.write_generation(
                     self.config.results_dir, self.config, self, gen, self.log, F, X,
                     objective_names=list(env.objectives.keys()), surrogate_rows=surrogate_rows,
+                    write_fronts=write_fronts,
                 )
+                if write_fronts:
+                    self._last_fronts_gen = gen
 
             # reset per-generation evaluator state after writing
             if hasattr(ev, 'clear_dominated_solutions'):
@@ -113,6 +126,28 @@ class NSGA2(NSGA2lib):
 
         # obtain the result objective from the algorithm
         res = self.result()
+
+        # Always log the FINAL front exactly once so final-state metrics stay exact even when the
+        # last generation fell between strides. The _last_fronts_gen guard prevents a duplicate:
+        # it skips when this gen was already strided in, and makes a budget-spent no-op resume
+        # (loop body never runs, n_gen unchanged) leave fronts.csv untouched.
+        if isinstance(res, list):
+            F = np.array([ind.F for ind in res]); X = np.array([ind.X for ind in res])
+        elif res is not None and res.opt is not None:
+            F = res.opt.get('F'); X = res.opt.get('X')
+        else:
+            F, X = None, None
+        gen = self.n_gen - 1
+        if F is not None and len(F) > 0 and self._last_fronts_gen != gen:
+            results_io.append_fronts(self.config.results_dir, gen, F,
+                                     list(env.objectives.keys()))
+            results_io.write_final_solutions(self.config.results_dir, X)
+            self._last_fronts_gen = gen
+            # Persist the pickle so the updated _last_fronts_gen is recorded; otherwise a later
+            # budget-spent resume would see the stale (pre-final-write) value and re-append the
+            # final front. The in-loop writes don't cover this because the final write is post-loop.
+            results_io.save_algo_pickle(self.config.results_dir, self)
+
         return res, self.log
 
     def resume(self):

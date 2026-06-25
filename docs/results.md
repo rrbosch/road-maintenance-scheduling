@@ -28,10 +28,10 @@ supported** — overhaul item 7.)
 |---|---|
 | `config.json` | Machine-readable run metadata (all `Config` attributes). Replaces the old `config.txt`. |
 | `progress.csv` | One row per generation: `iteration, time, time_cum, pareto_set_size, n_computed` + pruning diagnostics (`exact_evals, lb_pruned, scenarios_materialized, n_estimated`, and `false_pruned` — nonzero only in the E2 `count_false_pruning` diagnostic mode). |
-| `fronts.csv` | Long format `generation,<obj0>,<obj1>` for **every** generation — the raw Pareto fronts, so any metric / reference point can be recomputed offline. |
+| `fronts.csv` | Long format `generation,<obj0>,<obj1>` — the raw Pareto fronts, so any metric / reference point can be recomputed offline. Logged every `Config.fronts_log_interval` generations (default 10) plus the **final** front, since the full cumulative front written every generation dominated a run's on-disk size; set `fronts_log_interval=1` for the legacy every-generation behavior. Trajectory plots just sample more coarsely; final-state metrics are exact. |
 | `final_solutions.csv` | `sol_idx, x0..xN` — start-time vectors of the latest front (feeds the E3 schedule/Gantt interpretation). |
 | `surrogate.csv` | One row per regressor retrain: `n_computed, quantile, mape, pinball_loss, model` (the surrogate-accuracy learning curve). `model` is `component` (PLBE per-scenario lower bound) or `schedule` (the item-11 whole-schedule baseline). |
-| `algo.pkl` / `algo_backup.pkl` | Rolling pickles for crash-safe resume (atomic rotate). |
+| `algo.pkl` | Rolling pickle for crash-safe resume, written atomically (temp + `os.replace`). |
 | `output_log.txt` | Per-run log (when launched via `run_single_instance.py`). |
 
 `n_computed` is the **unique-simulations** counter (total traffic assignments run); it also paces

@@ -32,6 +32,7 @@ JSON, and logs) and resolved to classes via `Src/Algorithms/registry.py`.
 | `termination_arg` | `2000` | See the gotcha below. |
 | `callback` | `'OperatorSuccessCallback'` | Per-generation callback. |
 | `traffic_cache_size` | `200_000` | Max entries in the in-memory traffic-result cache (`None` = unbounded). |
+| `fronts_log_interval` | `10` | How often (in generations) to append the cumulative Pareto front to `fronts.csv`; the **final** front is always written. `fronts.csv` rows dominate a run's on-disk size, so striding keeps runs small (the every-gen default made SF-76 runs ~190 MB and overflowed the Snellius quota). `1` = legacy every-generation logging. |
 | `sims` | `{'traffic'}` | Active simulations (only `traffic` is used). |
 | `problem` | `'Problem_py'` | Problem class (only one). |
 

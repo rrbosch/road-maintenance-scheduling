@@ -8,11 +8,13 @@ old per-generation ``F_<gen>.csv``/``X_<gen>.csv`` explosion:
   ``fronts.csv``          long format ``generation,<obj0>,<obj1>`` for *every* generation
   ``final_solutions.csv`` ``sol_idx,x0..xN`` start-time vectors of the latest front (for E3 Gantts)
   ``surrogate.csv``       one row per regressor retrain: ``n_computed,quantile,mape,pinball_loss``
-  ``algo.pkl`` / ``algo_backup.pkl``  rolling pickles for crash-safe resume
+  ``algo.pkl``            rolling pickle for crash-safe resume (written atomically, see below)
 
 ``progress.csv`` and ``final_solutions.csv`` are rewritten in full each generation (cheap, and
 resume-safe because they derive from the pickled ``algo``); ``fronts.csv``/``surrogate.csv`` are
-appended.
+appended. ``fronts.csv`` (the dominant cost — the whole cumulative front, every generation) is
+written only every ``write_fronts``-th generation by the caller, plus once for the final front, so
+the file stays small while final-state metrics stay exact.
 
 The full-rewrite files are written **atomically** (temp file + ``os.replace``): a plain in-place
 ``to_csv`` truncates the target the instant it opens, so a kill mid-write (e.g. a SLURM walltime
@@ -22,7 +24,6 @@ interrupted write leaves the previous good file untouched.
 import json
 import os
 import pickle
-import shutil
 from os import path
 
 import numpy as np
@@ -71,15 +72,19 @@ def write_config(result_dir, config):
 
 
 def save_algo_pickle(result_dir, algo):
-    """Atomically rotate algo.pkl -> algo_backup.pkl and write the fresh pickle (crash-safe)."""
+    """Atomically write algo.pkl (crash-safe): full temp pickle, then ``os.replace``.
+
+    ``pickle.dump`` writes the entire temp file before any rename, and ``os.replace(temp, primary)``
+    is atomic on the same filesystem (POSIX ``rename(2)`` — incl. Lustre/NFS on Snellius — and on
+    Windows), so ``primary`` is always either the previous-complete or the new-complete pickle:
+    a kill mid-write (e.g. a SLURM walltime SIGKILL) or a failing ``dump`` never truncates it. The
+    separate ``algo_backup.pkl`` is therefore redundant and no longer written (it doubled run size).
+    """
     primary = path.join(result_dir, 'algo.pkl')
-    backup = path.join(result_dir, 'algo_backup.pkl')
     temp = path.join(result_dir, 'algo_temp.pkl')
     with open(temp, 'wb') as f:
         pickle.dump(algo, f)
-    if path.exists(primary):
-        shutil.move(primary, backup)
-    shutil.move(temp, primary)
+    os.replace(temp, primary)
 
 
 def append_fronts(result_dir, generation, F, objective_names):
@@ -113,16 +118,22 @@ def append_surrogate(result_dir, rows):
 
 
 def write_generation(result_dir, config, algo, generation, log, F, X, objective_names,
-                     surrogate_rows=()):
+                     surrogate_rows=(), write_fronts=True):
     """Persist everything for one generation: config (once), pickle, fronts, final X, progress.
 
     ``F``/``X`` are the current cumulative Pareto front's objective values / start-time vectors;
     ``log`` is the full per-generation record list; ``surrogate_rows`` are retrain-accuracy rows
     accumulated since the last call.
+
+    ``write_fronts`` gates only the two front-derived files (``fronts.csv`` append +
+    ``final_solutions.csv`` rewrite); the caller strides these to keep ``fronts.csv`` small. The
+    pickle, progress, config and surrogate log are always written (cheap, and needed for resume /
+    per-gen diagnostics / the incremental surrogate-log drain).
     """
     write_config(result_dir, config)
     save_algo_pickle(result_dir, algo)
-    append_fronts(result_dir, generation, F, objective_names)
-    write_final_solutions(result_dir, X)
+    if write_fronts:
+        append_fronts(result_dir, generation, F, objective_names)
+        write_final_solutions(result_dir, X)
     write_progress(result_dir, log)
     append_surrogate(result_dir, surrogate_rows)

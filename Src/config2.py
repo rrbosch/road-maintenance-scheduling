@@ -59,6 +59,10 @@ class Config:
         # Max entries kept in the in-memory traffic-simulation cache (FIFO eviction beyond this).
         # None disables eviction (unbounded, legacy behavior).
         self.traffic_cache_size = 200_000
+        # How often (in generations) to append the cumulative Pareto front to fronts.csv. The FINAL
+        # front is always written regardless of this stride. N=1 logs every generation (legacy
+        # behavior); larger N shrinks fronts.csv (its rows dominate a run's on-disk footprint).
+        self.fronts_log_interval = 10
 
         # set args
         for key, value in args.items():
