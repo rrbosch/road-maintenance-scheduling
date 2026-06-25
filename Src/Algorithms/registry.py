@@ -13,8 +13,11 @@ from Src.Algorithms.Callback import OperatorSuccessCallback, PlottingCallback, S
 from Src.Algorithms.Evaluators import (
     ApproximateEvaluator,
     LowerBoundEvaluator,
+    ScheduleSurrogateEvaluator,
     StandardEvaluator,
 )
+from Src.Algorithms.BranchAndBoundSolver import BranchAndBoundSolver
+from Src.Algorithms.ExactSolver import ExactParetoSolver
 from Src.Algorithms.Heuristics import (
     IncreasingSlackHeuristic,
     WeightedSlackHeuristic,
@@ -50,7 +53,7 @@ from Src.Algorithms.Operators.Termination import (
 # config and the class stay in sync automatically.
 _REGISTERED = [
     # evaluators
-    StandardEvaluator, LowerBoundEvaluator, ApproximateEvaluator,
+    StandardEvaluator, LowerBoundEvaluator, ApproximateEvaluator, ScheduleSurrogateEvaluator,
     # samplers
     IntegerRandomSampling, WeightedSlackSampling, FeasibleRandomSampling,
     # crossovers (CompositeCrossover bundles the rest, but allow selecting any directly)
@@ -65,6 +68,9 @@ _REGISTERED = [
     OperatorSuccessCallback, StandardCallback, PlottingCallback,
     # heuristic algorithms (selected via Config.algo_name)
     WeightedSlackHeuristic, WeightedSlackHeuristicRollout, IncreasingSlackHeuristic,
+    # exact solvers (selected via Config.algo_name; SF-9/SF-8 ground truth, item 16). The B&B solver
+    # is an independent cross-check that prunes instead of enumerating the full feasible space.
+    ExactParetoSolver, BranchAndBoundSolver,
 ]
 
 REGISTRY = {cls.__name__: cls for cls in _REGISTERED}

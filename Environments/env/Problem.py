@@ -32,7 +32,9 @@ class Problem_py(ElementwiseProblem):
 
     Construction inputs are loaded from ``Environments/input/<case_study>/`` by ``load_input_data``.
     """
-    def __init__(self, case_study, models, objectives, lower_bound=None, lower_bound_quantile=0, traffic_cache_size=200_000):
+    def __init__(self, case_study, models, objectives, lower_bound=None, lower_bound_quantile=0,
+                 traffic_cache_size=200_000, schedule_surrogate_quantile=0.5,
+                 surrogate_noise=0.0, count_false_pruning=False, seed=0):
         # start with loading the requisite data
         input_data = load_input_data(case_study, models)
         self.case_study = case_study
@@ -40,6 +42,15 @@ class Problem_py(ElementwiseProblem):
         self.lower_bound = lower_bound
         self.lower_bound_quantile = lower_bound_quantile
         self.traffic_cache_size = traffic_cache_size
+        # Centered-quantile knob for the whole-schedule surrogate baseline (item 11 / E1). Kept
+        # separate from lower_bound_quantile (PLBE's low quantile) so the baseline stays a point
+        # estimate; only used by ScheduleSurrogateEvaluator.
+        self.schedule_surrogate_quantile = schedule_surrogate_quantile
+        # E2 (item 12) surrogate error-sensitivity knobs: noise std injected into surrogate
+        # predictions, and the diagnostic flag read by the evaluators to count false pruning.
+        self.surrogate_noise = surrogate_noise
+        self.count_false_pruning = count_false_pruning
+        self.seed_value = seed
 
         input_data['general']['years'] = int(input_data['general']['time periods'] / input_data['general']['time periods per year'])
         self._input = input_data
@@ -190,9 +201,15 @@ class Problem_py(ElementwiseProblem):
         finishes = planned_df['finish'].values
         T = self.input['general']['time periods']
 
-        # Build ongoing projects per time period using vectorized filtering
+        # Build ongoing projects per time period using vectorized filtering.
+        # A project occupies the half-open interval [start, finish) = [start, start+duration), i.e.
+        # exactly `duration` periods (finish is the first FREE period, exclusive). This matches
+        # Objectives.get_partial_value's range(start, end) and makes "duration" mean the number of
+        # active periods. (Pre-2026-06 the upper bound was inclusive `t <= finishes`, which counted
+        # duration+1 periods; that off-by-one was corrected for the SF-8 micro-instance and applies
+        # to all case studies.)
         ongoing_projects = [
-            frozenset(project_indices[(starts <= t) & (t <= finishes)])
+            frozenset(project_indices[(starts <= t) & (t < finishes)])
             for t in range(T)
         ]
 
@@ -273,7 +290,9 @@ class Problem_py(ElementwiseProblem):
         if 'TTD' in objectives:
             if 'traffic' not in sims:
                 raise Exception("traffic simulation is required for TTD calculation, but was not found.")
-            objective_classes['TTD'] = ob.TotalTravelDelay(maxsize=self.traffic_cache_size)
+            objective_classes['TTD'] = ob.TotalTravelDelay(maxsize=self.traffic_cache_size,
+                                                           surrogate_noise=self.surrogate_noise,
+                                                           noise_seed=self.seed_value)
             objective_classes['TTD'].add_scenario(frozenset(), self)
         self.objectives = objective_classes
 

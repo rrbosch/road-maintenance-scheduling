@@ -72,12 +72,26 @@ class CustomCrossover(Crossover): # more apt name is ScoreWeightedCrossover
                 traffic_per_project = traffic_per_project / problem.input['projects']['duration'].values
                 risk_per_project, _ = problem.objectives['SL'].get_lower_bound(problem, x_dict, decomposed=True)
                 risk_per_project = np.array(risk_per_project)
-                traffic_per_project = traffic_per_project / traffic_per_project.sum()
-                risk_per_project = risk_per_project / risk_per_project.sum()
+                # Guard the normalizations: a degenerate-but-feasible schedule (no ongoing
+                # projects, or flat traffic/zero total risk) can sum to 0, which would make the
+                # scores NaN. Fall back to a uniform score, mirroring the mutation operators.
+                t_sum = traffic_per_project.sum()
+                if t_sum > 0 and np.isfinite(t_sum):
+                    traffic_per_project = traffic_per_project / t_sum
+                else:
+                    traffic_per_project = np.full(traffic_per_project.size, 1 / traffic_per_project.size)
+                r_sum = risk_per_project.sum()
+                if r_sum > 0 and np.isfinite(r_sum):
+                    risk_per_project = risk_per_project / r_sum
+                else:
+                    risk_per_project = np.full(risk_per_project.size, 1 / risk_per_project.size)
                 project_score[m, :] = traffic_per_project + risk_per_project
 
-            # create random weighted crossover
-            weights = project_score[0] / (project_score[0]+project_score[1])
+            # create random weighted crossover; where both parents score 0 for a project the
+            # denominator is 0 -> default to 0.5 (an even coin flip) instead of NaN.
+            denom = project_score[0] + project_score[1]
+            weights = np.divide(project_score[0], denom,
+                                out=np.full_like(denom, 0.5), where=denom > 0)
             for m in range(n_matings):
                 mask = self.rng.random(weights.shape) < weights
                 new_q = X[1, p, :]
@@ -101,8 +115,12 @@ class NOptCrossover(Crossover):
         Q = np.zeros(shape=(2, X.shape[1], X.shape[2]), dtype=int) - 1
 
         for i in range(X.shape[1]):
-            n_opt = self.rng.geometric(p=0.5) + 1
-            idx = np.sort(self.rng.choice(problem.input['general']['time periods'], size=n_opt, replace=False))
+            n_periods = problem.input['general']['time periods']
+            # clamp to the horizon: sampling without replacement needs n_opt <= n_periods
+            # (mirrors the guard in Mutation.N_Opt). Only bites on small-T instances
+            # (e.g. SF-12, T=20) run for many generations; harmless on large-T networks.
+            n_opt = min(self.rng.geometric(p=0.5) + 1, n_periods)
+            idx = np.sort(self.rng.choice(n_periods, size=n_opt, replace=False))
             if n_opt % 2 == 1:
                 idx = np.concatenate(([0], idx))
 

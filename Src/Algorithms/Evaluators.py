@@ -17,6 +17,8 @@ from pymoo.core.individual import Individual
 from pymoo.core.population import Population
 from pymoo.util.nds.non_dominated_sorting import find_non_dominated
 
+from Src.Utils.Utils import LowerBoundInfo
+
 
 class StandardEvaluator(Evaluator):
     """Plain exact evaluation of every individual (pymoo's default behavior)."""
@@ -47,6 +49,7 @@ class LowerBoundEvaluator(Evaluator):
         self.n_lb_pruned = 0            # individuals discarded on their lower bound alone
         self.n_scenarios_materialized = 0  # estimated scenarios turned exact via add_scenario
         self.n_estimated = 0            # estimated scenario-contributions seen across LB computations
+        self.n_false_pruned = 0         # E2 diagnostic: pruned solutions exact-eval would have kept
 
     def _eval(self, problem, pop, evaluate_values_of, **kwargs):
         # evaluate individuals one by one (each may trigger several scenario materializations)
@@ -148,6 +151,34 @@ class LowerBoundEvaluator(Evaluator):
             'iteration': iteration,
         }
         self.dominated_solutions.append(dominated_record)
+        # E2 (item 12): in the false-pruning diagnostic mode, check whether this just-pruned
+        # solution would actually have survived an exact evaluation.
+        self._maybe_count_false_pruning(ind)
+
+    def _maybe_count_false_pruning(self, ind):
+        """Count a *false prune*: a solution discarded by the LB/surrogate screen whose true
+        objectives are non-dominated by the current Pareto front (i.e. it should have been kept).
+
+        Only runs when ``problem.count_false_pruning`` is set — it exactly evaluates the pruned
+        solution (extra sims), so it is a measurement mode for a few seeds, not for production.
+        With a *valid* lower bound this can never happen (LB <= true F, so an LB dominated by the
+        front implies the true F is dominated too); it becomes positive exactly when the surrogate
+        over-predicts (e.g. injected noise, or too high a quantile) — the EP-vs-LE robustness study.
+        """
+        problem = getattr(self.algorithm, 'problem', None)
+        if problem is None or not getattr(problem, 'count_false_pruning', False):
+            return
+        x = ind.get("X")
+        out = problem.evaluate(x, return_as_dictionary=True)
+        true_F = np.atleast_2d(np.asarray(out['F'], dtype=float))
+        if not np.all(np.isfinite(true_F)):
+            return  # infeasible / no real objective => not a false prune
+        if self.algorithm.opt is None:
+            self.n_false_pruned += 1  # nothing to dominate it yet => it would have been kept
+            return
+        _F = np.atleast_2d(self.algorithm.opt.get("F"))
+        if len(find_non_dominated(F=true_F, _F=_F)) > 0:
+            self.n_false_pruned += 1
 
     def clear_dominated_solutions(self):
         """Clear the dominated solutions list after writing to file."""
@@ -186,6 +217,126 @@ class ApproximateEvaluator(LowerBoundEvaluator):
         # Update the pareto optimal set
         # new_pareto = update_true_pareto_front(self.algorithm.opt, pop)
         # self.algorithm.opt = new_pareto
+
+
+class ScheduleSurrogateEvaluator(LowerBoundEvaluator):
+    """E1 control (revision item 11): standard surrogate-assisted NSGA-II via whole-schedule pre-selection.
+
+    Implements the textbook surrogate-assisted-EA recipe — an **absolute-fitness regression**
+    surrogate predicts each offspring's objective and only the most promising offspring are
+    evaluated exactly: **individual-based evolution control by pre-selection** (Jin, Y. 2011,
+    *Surrogate-assisted evolutionary computation*, Swarm & Evol. Comput. 1(2):61-70;
+    Díaz-Manríquez et al. 2016, *A Review of Surrogate-Assisted Multiobjective Evolutionary
+    Algorithms*, Comput. Intell. Neurosci. 2016:9420460). The surrogate here is a whole-schedule
+    TTD point predictor (``Objectives.ScheduleLevelSurrogate``, mirroring Mao et al. 2021); "most
+    promising" = predicted non-dominated w.r.t. the current Pareto front. SL (Tardiness) is
+    closed-form, so it is screened exactly.
+
+    This is the deliberate *control* against PLBE (``LowerBoundEvaluator``): unlike PLBE it screens
+    with a **point estimate, not a lower bound** (no soundness guarantee) at the **whole-schedule**
+    level with **no per-scenario progressive refinement**. Comparing the two isolates where PLBE's
+    simulation savings come from (component-level surrogacy + progressive pruning), rather than from
+    "using ML". Structurally it mirrors ``ApproximateEvaluator`` (screen the whole population, then
+    exactly evaluate only the survivors).
+
+    Shared progress.csv diagnostics take this evaluator's meaning: ``n_exact_evals`` = schedules
+    given a full exact evaluation (the sims); ``n_lb_pruned`` = schedules pruned by the surrogate
+    screen; ``n_scenarios_materialized`` = 0 (no per-scenario refinement); ``n_estimated`` =
+    surrogate point predictions made.
+    """
+
+    def __init__(self):
+        super().__init__()
+        self.surrogate = None  # lazily created on first _eval (needs problem.n_var)
+
+    def _ensure_surrogate(self, problem):
+        """Lazily build the schedule surrogate and (re)bind its log to ``TTD.surrogate_log``.
+
+        Rebinding every generation means NSGA2.get_res (which drains
+        ``env.objectives['TTD'].surrogate_log``) picks up our rows with no change, and a resumed run
+        binds to the freshly created problem's log.
+        """
+        if self.surrogate is None:
+            from Environments.env.Objectives import ScheduleLevelSurrogate
+            q = getattr(problem, 'schedule_surrogate_quantile', 0.5)
+            self.surrogate = ScheduleLevelSurrogate(
+                problem.n_var, quantile=q, model='XGBoost',
+                surrogate_noise=getattr(problem, 'surrogate_noise', 0.0),
+                noise_seed=getattr(problem, 'seed_value', 0))
+        ttd = problem.objectives.get('TTD')
+        if ttd is not None:
+            self.surrogate.surrogate_log = ttd.surrogate_log
+
+    def evaluate_lower_bounds(self, ind, problem):
+        """Build the *predicted* objective vector F_hat = [<exact cheap objs>, TTD_pred].
+
+        Stored on ``ind.data['lb']`` as a LowerBoundInfo (no missing info) so the inherited
+        ``is_better_than_pareto_front`` screen works unchanged. Before the surrogate is trained the
+        TTD prediction is ``-inf`` so the individual is treated as non-dominated and gets an exact
+        evaluation (warming up the surrogate's training set).
+        """
+        x = ind.get("X")
+        x_dict = problem.get_x_dict(x)
+        F_hat = []
+        for key, objective in problem.objectives.items():
+            if key == 'TTD':
+                pred = self.surrogate.predict([x])
+                F_hat.append(float(pred[0]) if pred is not None else -np.inf)
+                self.n_estimated += 1
+            else:
+                F_hat.append(objective.get_value(problem, x_dict))  # closed-form, exact (SL)
+        ind.data['lb'] = LowerBoundInfo(F_lb=np.array(F_hat, dtype=float), missing_info=[])
+
+    def _eval(self, problem, pop, evaluate_values_of, **kwargs):
+        self._ensure_surrogate(problem)
+        ttd_idx = list(problem.objectives.keys()).index('TTD')
+
+        # pass 1: feasibility check + cheap surrogate screen of the whole population
+        for ind in pop:
+            x = ind.get("X")
+            x_dict = problem.get_x_dict(x)
+            G = problem.check_scheduling_constraints(x_dict)
+            ind.set("G", G)
+            if not ind.feasible:
+                F = np.array([np.inf for _ in problem.objectives])
+                ind.set("F", F)
+                ind.set("H", [])
+                ind.evaluated.update(('F', 'G', 'H'))
+                ind.data['lb'] = LowerBoundInfo(F_lb=F, missing_info=[], dominated=True)
+                continue
+            self.evaluate_lower_bounds(ind, problem)
+            self.is_better_than_pareto_front(ind)
+
+        # pass 2: exactly evaluate predicted-non-dominated survivors; prune the rest (F = inf)
+        for ind in pop:
+            if not ind.feasible:
+                continue
+            if ind.data['lb'].dominated:
+                self._record_dominated_solution(
+                    ind, iteration=self.algorithm.n_gen - 1 if self.algorithm else None)
+                F = np.array([np.inf] * len(ind.data['lb'].F_lb))
+                ind.set("F", F)
+                ind.set("H", [])
+                ind.evaluated.update(('F', 'G', 'H'))
+            else:
+                x = ind.get("X")
+                out = problem.evaluate(x, return_values_of=evaluate_values_of,
+                                       return_as_dictionary=True, **kwargs)
+                self.n_exact_evals += 1
+                for key, item in out.items():
+                    ind.set(key, item)
+                ind.evaluated.update(out.keys())
+                # learn: feed the exact (x -> true TTD) pair to the surrogate, grow the Pareto front
+                self.surrogate.add_observation(x, out['F'][ttd_idx])
+                new_opt = Population.merge(ind, self.algorithm.opt)
+                if isinstance(new_opt, Individual):
+                    new_opt = Population(new_opt)
+                self.algorithm.opt = new_opt
+
+        # retrain the surrogate on the shared n_computed cadence, refresh the cumulative front
+        self.surrogate.maybe_retrain(problem.sims['traffic'].n_computed)
+        new_pareto = update_true_pareto_front(self.algorithm.opt)
+        self.algorithm.opt = new_pareto
 
 
 def update_true_pareto_front(p_old, p_new=None):

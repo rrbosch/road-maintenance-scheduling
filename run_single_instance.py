@@ -127,11 +127,14 @@ def process_experiment(expe_id, json_file):
 
 
 def load_latest_valid_pickle(directory):
-    """Load algo.pkl, falling back to algo_backup.pkl if corrupted."""
-    primary_path = path.join(directory, "algo.pkl")
-    backup_path = path.join(directory, "algo_backup.pkl")
+    """Load algo.pkl (the live resume path is resume_run; this is a standalone helper).
 
-    # Try primary first
+    algo.pkl is written atomically (temp + os.replace in results_io.save_algo_pickle), so it is
+    never half-written — the previous separate algo_backup.pkl is no longer produced and the old
+    backup fallback was removed.
+    """
+    primary_path = path.join(directory, "algo.pkl")
+
     if path.exists(primary_path):
         try:
             with open(primary_path, "rb") as f:
@@ -139,20 +142,10 @@ def load_latest_valid_pickle(directory):
             print(f"Successfully loaded: {primary_path}")
             return data
         except (pickle.UnpicklingError, EOFError) as e:
-            print(f"Failed to load {primary_path}: {e}, trying backup...")
+            print(f"Failed to load {primary_path}: {e}")
 
-    # Try backup
-    if path.exists(backup_path):
-        try:
-            with open(backup_path, "rb") as f:
-                data = pickle.load(f)
-            print(f"Successfully loaded: {backup_path}")
-            return data
-        except (pickle.UnpicklingError, EOFError) as e:
-            print(f"Failed to load {backup_path}: {e}")
-
-    # No valid files found
-    print("No valid pickle files found, starting fresh")
+    # No valid file found
+    print("No valid pickle file found, starting fresh")
     return None
 
 if __name__ == "__main__":

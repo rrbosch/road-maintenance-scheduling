@@ -85,7 +85,7 @@ class TotalTravelDelay(Objective):
     results are cached (``results``) and unseen scenarios are estimated by a regressor for the
     lower-bound path. ``add_scenario`` materializes one scenario's true cost on demand.
     """
-    def __init__(self, maxsize=200_000):
+    def __init__(self, maxsize=200_000, surrogate_noise=0.0, noise_seed=0):
         # FIFO-bounded cache of scenario costs. The baseline empty scenario is pinned because it
         # is read directly as the network's base cost (e.g. in get_estimation / get_lower_bound).
         self.results = FIFOCache(maxsize=maxsize, pinned={frozenset()})
@@ -93,6 +93,10 @@ class TotalTravelDelay(Objective):
         self.n_columns = None
         self.last_update = 0
         self.base_cost = None
+        # E2 (item 12): std of multiplicative relative noise added to surrogate predictions, with a
+        # dedicated seeded RNG (reproducible within a process). 0.0 => no noise (production default).
+        self.surrogate_noise = surrogate_noise
+        self._noise_rng = np.random.default_rng(noise_seed)
         # Held-out surrogate-accuracy rows accumulated at each retrain (drained to surrogate.csv by
         # NSGA2.get_res). Each row: {'n_computed', 'quantile', 'mape', 'pinball_loss'}.
         self.surrogate_log = []
@@ -274,7 +278,7 @@ class TotalTravelDelay(Objective):
         except Exception:
             mape, pinball = float('nan'), float('nan')
         self.surrogate_log.append({'n_computed': n_computed, 'quantile': quantile,
-                                   'mape': mape, 'pinball_loss': pinball})
+                                   'mape': mape, 'pinball_loss': pinball, 'model': 'component'})
 
     def _predict_raw(self, X):
         """Predict with whichever regressor variant is active (Booster needs a DMatrix)."""
@@ -294,8 +298,136 @@ class TotalTravelDelay(Objective):
         else:
             x_test = frozensets_to_sparse_matrix(op, self.n_columns)
             result2 = self.regressor.predict(x_test)
+            result2 = self._add_noise(result2)  # E2: controlled surrogate error (no-op if noise=0)
             result2 = np.maximum(result2, self.results[frozenset()])
             return result2
+
+    def _add_noise(self, preds):
+        """Inject controlled multiplicative relative noise into predictions (E2 / item 12).
+
+        ``preds *= (1 + N(0, surrogate_noise))``. With ``surrogate_noise=0`` this is a no-op. Note
+        that noise can push an estimate *above* the true cost, breaking the lower-bound guarantee
+        and thus inducing false pruning — which is exactly what the E2 sensitivity study measures.
+        """
+        if not self.surrogate_noise:
+            return preds
+        preds = np.asarray(preds, dtype=float)
+        return preds * (1.0 + self._noise_rng.normal(0.0, self.surrogate_noise, size=preds.shape))
+
+
+class ScheduleLevelSurrogate:
+    """Whole-schedule TTD surrogate for the E1 pre-selection baseline (revision item 11).
+
+    Predicts the *entire schedule's* Total Travel Delay directly from its start-time vector ``x``,
+    so an evaluator can screen offspring without running any traffic assignment. This is the
+    "standard" surrogate-assisted-EA recipe, deliberately contrasted with PLBE's component-level
+    lower bound. Literature it mirrors (keep these citations — see CLAUDE.md item 11):
+
+    * **Model — gradient-boosted decision trees (XGBoost).** Follows Mao, T., Mihaita, A.-S.,
+      Chen, F. & Vu, H. L. (2021), *Boosted Genetic Algorithm using Machine Learning for traffic
+      control optimization* (arXiv:2103.08317), who train an **extreme-gradient boosted-tree
+      regressor** to predict a traffic network's **total travel time** and use it **in place of the
+      traffic simulation** inside a GA's fitness evaluation. Same family of idea: Bagloee, Sarvi
+      et al., surrogate-based road-network-design optimization.
+    * **Target — exact whole-schedule TTD** (summed over periods), learned only from schedules the
+      evaluator has evaluated exactly.
+    * **Prediction — a centered point estimate** (median, ``quantile=0.5`` by default), NOT PLBE's
+      low lower-bound quantile: a pre-selection surrogate wants an *unbiased* fitness prediction,
+      not a bound. Consequently there is **no** per-scenario "missing information" and **no**
+      progressive refinement loop.
+    * **Features — the raw integer start-time vector ``x``** (``-1`` = not planned), in contrast to
+      PLBE's per-scenario frozenset encoding (``frozensets_to_sparse_matrix``), which this surrogate
+      deliberately does not use.
+
+    Contrasting this baseline against PLBE isolates exactly the two ingredients PLBE adds on top of
+    "using ML": a soundness guarantee (a bound, not a point estimate) and component-level
+    progressive pruning. Retraining is paced by the same ``REGRESSOR_RETRAIN_INTERVAL`` cadence as
+    ``TotalTravelDelay`` so the two surrogates' learning curves are comparable.
+    """
+
+    def __init__(self, n_var, quantile=0.5, model="XGBoost", surrogate_noise=0.0, noise_seed=0):
+        self.n_var = n_var
+        self.quantile = quantile          # 0.5 => median (a centered point estimate)
+        self.model = model
+        self.regressor = None
+        self.buffer = {}                  # tuple(x) -> exact TTD (dedup on the whole schedule)
+        self.last_update = 0              # n_computed at last retrain (paces retraining like TTD)
+        # E2 (item 12): controlled multiplicative noise on predictions (0.0 => none).
+        self.surrogate_noise = surrogate_noise
+        self._noise_rng = np.random.default_rng(noise_seed)
+        # Accuracy rows; the evaluator rebinds this to TotalTravelDelay.surrogate_log each generation
+        # so NSGA2.get_res drains them to surrogate.csv with no change to get_res.
+        self.surrogate_log = []
+
+    @staticmethod
+    def _encode(x_list):
+        """Stack start-time vectors into a dense feature matrix (XGBoost handles -1 / integers)."""
+        return np.asarray(x_list, dtype=float)
+
+    def add_observation(self, x, ttd):
+        """Record an exactly-evaluated schedule (``x`` -> true TTD) for training (dedup on ``x``)."""
+        self.buffer[tuple(int(v) for v in x)] = float(ttd)
+
+    def is_ready(self):
+        """True once a regressor has been fit (before that, the evaluator must evaluate exactly)."""
+        return self.regressor is not None
+
+    def predict(self, x_list):
+        """Point-estimate TTD for each schedule in ``x_list`` (``None`` until the first fit)."""
+        if self.regressor is None:
+            return None
+        preds = self._predict_raw(self._encode(x_list))
+        if self.surrogate_noise:  # E2: controlled surrogate error (no-op if noise=0)
+            preds = np.asarray(preds, dtype=float)
+            preds = preds * (1.0 + self._noise_rng.normal(0.0, self.surrogate_noise, size=preds.shape))
+        return preds
+
+    def _predict_raw(self, X):
+        return self.regressor.predict(X)
+
+    def maybe_retrain(self, n_computed):
+        """(Re)fit on the same +REGRESSOR_RETRAIN_INTERVAL-assignment cadence as the component model."""
+        if len(self.buffer) < 2:
+            return
+        if self.regressor is not None and n_computed - self.last_update <= REGRESSOR_RETRAIN_INTERVAL:
+            return
+        self.last_update = n_computed
+
+        X = self._encode(list(self.buffer.keys()))
+        y = np.array(list(self.buffer.values()))
+        # Hold out a small validation set for the learning-curve log once enough data exists.
+        if len(self.buffer) >= 10:
+            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1, random_state=42)
+        else:
+            X_train, X_test, y_train, y_test = X, X, y, y
+
+        # GBDT point predictor (Mao et al. 2021). quantile_alpha=0.5 => median (centered); kept
+        # parallel to TotalTravelDelay's component regressor so only the quantile and the feature
+        # encoding differ. (Swap objective to "reg:squarederror" for a mean estimate if preferred.)
+        if self.model == "XGBoost":
+            self.regressor = xgb.XGBRegressor(n_estimators=1000, max_depth=8, grow_policy='lossguide',
+                                              objective="reg:quantileerror", quantile_alpha=self.quantile,
+                                              learning_rate=0.1, reg_lambda=0.1, tree_method="hist",
+                                              early_stopping_rounds=10)
+            self.regressor.fit(X_train, y_train, eval_set=[(X_test, y_test)], verbose=False)
+        else:
+            raise NotImplementedError(f"ScheduleLevelSurrogate model '{self.model}' not implemented")
+
+        self._log_accuracy(X_test, y_test, n_computed)
+
+    def _log_accuracy(self, X_val, y_val, n_computed):
+        """Append a held-out (MAPE, pinball-loss) row tagged ``model='schedule'`` (E2 learning curve)."""
+        try:
+            preds = self._predict_raw(X_val)
+            y_val = np.asarray(y_val, dtype=float)
+            resid = y_val - preds
+            nonzero = np.abs(y_val) > 0
+            mape = float(np.mean(np.abs(resid[nonzero]) / np.abs(y_val[nonzero]))) if nonzero.any() else float('nan')
+            pinball = float(np.mean(np.maximum(self.quantile * resid, (self.quantile - 1.0) * resid)))
+        except Exception:
+            mape, pinball = float('nan'), float('nan')
+        self.surrogate_log.append({'n_computed': n_computed, 'quantile': self.quantile,
+                                   'mape': mape, 'pinball_loss': pinball, 'model': 'schedule'})
 
 
 class SubsetMaxRegressor:

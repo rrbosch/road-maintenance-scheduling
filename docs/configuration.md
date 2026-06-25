@@ -15,12 +15,15 @@ JSON, and logs) and resolved to classes via `Src/Algorithms/registry.py`.
 | `experiment_name` | `None` | **Required.** Top-level results folder name. |
 | `case_study` | `'Sioux Falls Expanded'` | Subfolder under `Environments/input/`. See list below. |
 | `objectives` | `{'SL', 'TTD'}` | Objective set: `SL` (tardiness/risk), `TTD` (travel delay). |
-| `algo_name` | `'NSGA2'` | `NSGA2`, or a `*Heuristic` algorithm. |
+| `algo_name` | `'NSGA2'` | `NSGA2`, a `*Heuristic` algorithm, or `ExactParetoSolver` (full-enumeration exact Pareto front; **SF-9/SF-8 only**, the campaign-E1 ground truth — ignores the NSGA-II operator/evaluator settings). |
 | `algo_seed` | `1` | RNG seed (one run per seed). |
 | `pop_size` | `100` | NSGA-II population size. |
-| `evaluator` | `'ApproximateEvaluator'` | `StandardEvaluator` (exact), `LowerBoundEvaluator` (PLBE), `ApproximateEvaluator`. |
+| `evaluator` | `'ApproximateEvaluator'` | `StandardEvaluator` (exact), `LowerBoundEvaluator` (PLBE), `ApproximateEvaluator`, `ScheduleSurrogateEvaluator` (E1 baseline: whole-schedule TTD surrogate used for offspring pre-selection — Jin 2011 / Mao et al. 2021). |
 | `lower_bound` | `'XGBoost'` | TTD surrogate for the LB evaluators: `XGBoost` (quantile), `Heuristic` (`SubsetMaxRegressor`). |
 | `lower_bound_quantile` | `0.2` | Quantile for the XGBoost lower bound (e.g. `0.05, 0.1, 0.2, 0.5`). |
+| `schedule_surrogate_quantile` | `0.5` | Quantile for `ScheduleSurrogateEvaluator`'s whole-schedule TTD predictor. `0.5` = median (a centered point estimate); independent of `lower_bound_quantile`. |
+| `surrogate_noise` | `0.0` | E2 (item 12) sensitivity knob: std of multiplicative relative noise (`pred *= 1+N(0,σ)`) injected into surrogate predictions. `0.0` = none. Sweep (e.g. `0.05, 0.1, 0.2, 0.5`) to map HV degradation vs. surrogate error. |
+| `count_false_pruning` | `False` | E2 (item 12) **diagnostic** mode: exact-evaluate every LB/surrogate-pruned solution and count those a valid evaluation would have kept (`false_pruned` in `progress.csv`). Costs extra simulations — for a few seeds only. With a valid lower bound this is ~0; it grows as the surrogate over-predicts (noise / high quantile). |
 | `sampling` | `'WeightedSlackSampling'` | Initial population sampler. |
 | `crossover` | `'CompositeCrossover'` | Crossover operator. |
 | `mutation` | `'CompositeMutation'` | Mutation operator. |
@@ -29,6 +32,7 @@ JSON, and logs) and resolved to classes via `Src/Algorithms/registry.py`.
 | `termination_arg` | `2000` | See the gotcha below. |
 | `callback` | `'OperatorSuccessCallback'` | Per-generation callback. |
 | `traffic_cache_size` | `200_000` | Max entries in the in-memory traffic-result cache (`None` = unbounded). |
+| `fronts_log_interval` | `10` | How often (in generations) to append the cumulative Pareto front to `fronts.csv`; the **final** front is always written. `fronts.csv` rows dominate a run's on-disk size, so striding keeps runs small (the every-gen default made SF-76 runs ~190 MB and overflowed the Snellius quota). `1` = legacy every-generation logging. |
 | `sims` | `{'traffic'}` | Active simulations (only `traffic` is used). |
 | `problem` | `'Problem_py'` | Problem class (only one). |
 
@@ -46,7 +50,14 @@ on the 24 h cap on HPC.
 
 Subfolders of `Environments/input/`:
 
-- `Sioux Falls Expanded` — the main literature case study.
+- `Sioux Falls Expanded` — the main literature case study (76 projects).
+- `Sioux Falls 9` — **SF-9 small instance** (9 projects, T=8, deadlines 6–8, cap 5, budget disabled):
+  the **campaign-E1 ground-truth instance**. Full feasible space = **711,196 schedules** (of 10.5M
+  nominal, 6.75%), still enumerable by the exact solver (item 16) but ~2 orders larger than SF-8.
+  avg 3 projects ongoing, mean duration 2.667. Regenerate via its `case_constructor.py`.
+- `Sioux Falls 8` — **SF-8 micro-instance** (8 projects, T=6, cap 5, budget disabled): a smaller
+  enumerable instance (6,305 feasible) retained as a variant; found too easy a search for E1, so
+  superseded by SF-9 (overhaul item 15). Regenerate via its `case_constructor.py`.
 - `Anaheim` — larger literature case study (914 links / 416 nodes / 1,406 OD), 80 congestion
   corridors as projects (overhaul item 2).
 - Parametric Sioux Falls variants: `Sioux Falls road capacity {0.9, 1.1, 100}`,
