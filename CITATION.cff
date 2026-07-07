@@ -25,7 +25,7 @@ authors:
     affiliation: "University of Twente"
     orcid: "https://orcid.org/0000-0001-9676-5259"
 repository-code: "https://github.com/rrbosch/road-maintenance-scheduling"
-doi: "10.5281/zenodo.20640179"
+doi: "10.5281/zenodo.20640178"
 license: MIT
 keywords:
   - multi-objective optimization
@@ -33,5 +33,5 @@ keywords:
   - traffic assignment
   - road maintenance scheduling
   - surrogate models
-version: "1.0.0"
-date-released: "2026-06-11"
+version: "1.1.0"
+date-released: "2026-07-07"
