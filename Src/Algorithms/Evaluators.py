@@ -40,6 +40,11 @@ class LowerBoundEvaluator(Evaluator):
         self.new_information_strategy = "impact"  # which estimated scenario to materialize first:
                                                   # the one with the largest contribution to the LB
         self.dominated_solutions = []  # LB-dominated solutions recorded per generation (for output)
+        # E2 (item 12, log-and-replay): sampled pruned candidates (x + incumbent front snapshot) to
+        # write to pruned_sample.csv each generation. Logging-only — see _record_dominated_solution.
+        self.pruned_samples = []
+        self._prune_log_rng = None  # lazily seeded from problem.seed_value (reproducible sampling)
+        self._prune_sample_counter = 0  # monotone sample id across the whole run (survives resume)
         # Per-generation pruning diagnostics (read + reset each generation by NSGA2.get_res).
         self.reset_diagnostics()
 
@@ -151,9 +156,60 @@ class LowerBoundEvaluator(Evaluator):
             'iteration': iteration,
         }
         self.dominated_solutions.append(dominated_record)
+        # E2 (item 12, log-and-replay): metric-neutral sampling logger (no exact eval, no sim).
+        self._maybe_log_pruned_sample(ind, iteration)
         # E2 (item 12): in the false-pruning diagnostic mode, check whether this just-pruned
-        # solution would actually have survived an exact evaluation.
+        # solution would actually have survived an exact evaluation. (Inline, sim-consuming — kept
+        # intact and complementary to the log-only sampler above.)
         self._maybe_count_false_pruning(ind)
+
+    def _maybe_log_pruned_sample(self, ind, iteration):
+        """LOG ONLY: with probability ``problem.false_pruning_log_prob``, snapshot this pruned
+        candidate for post-hoc false-pruning replay (``analysis/false_pruning.py``).
+
+        CRITICAL — metric neutrality. This method must never exact-evaluate, never run a traffic
+        assignment, never touch/populate the scenario cache, and never mutate any run counter
+        (``n_computed``, the per-gen diagnostics, iterations, timing). It only:
+          1. draws a Bernoulli(p) from a *dedicated* seeded RNG (does not perturb numpy's global
+             RNG, ``random``, or the algorithm RNG that drive the optimization), and
+          2. on a hit, appends an in-memory record: the pruned decision vector ``x`` and a snapshot
+             of the incumbent Pareto front objective vectors (``self.algorithm.opt.F``, already in
+             memory — read, not modified) at prune time.
+        Both ``x`` and the front are *copied* so later mutation of the population / front cannot
+        corrupt a recorded sample. With the hook off (p=0) it returns immediately. The recorded
+        rows are drained to ``pruned_sample.csv`` by NSGA2.get_res, mirroring ``dominated_solutions``.
+        """
+        problem = getattr(self.algorithm, 'problem', None)
+        if problem is None:
+            return
+        p = getattr(problem, 'false_pruning_log_prob', 0.0)
+        if not p or p <= 0.0:
+            return
+        # Lazily seed a dedicated RNG from the same algo_seed-derived seed surrogate_noise uses.
+        if self._prune_log_rng is None:
+            self._prune_log_rng = np.random.default_rng(getattr(problem, 'seed_value', 0))
+        if p < 1.0 and self._prune_log_rng.random() >= p:
+            return  # not sampled this time
+
+        x = ind.get("X")
+        # Snapshot the incumbent front objective vectors at prune time (copy so it's frozen).
+        opt = getattr(self.algorithm, 'opt', None)
+        if opt is not None:
+            front_F = np.atleast_2d(np.asarray(opt.get("F"), dtype=float)).copy()
+        else:
+            front_F = np.empty((0, len(getattr(problem, 'objectives', [None, None]))))
+        sample_id = self._prune_sample_counter
+        self._prune_sample_counter += 1
+        self.pruned_samples.append({
+            'sample_id': sample_id,
+            'iteration': iteration,
+            'X': np.asarray(x).copy(),
+            'front_F': front_F,
+        })
+
+    def clear_pruned_samples(self):
+        """Clear the per-generation pruned-sample buffer after writing to file."""
+        self.pruned_samples = []
 
     def _maybe_count_false_pruning(self, ind):
         """Count a *false prune*: a solution discarded by the LB/surrogate screen whose true

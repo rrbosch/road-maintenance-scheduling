@@ -118,9 +118,17 @@ class NSGA2(NSGA2lib):
                 if write_fronts:
                     self._last_fronts_gen = gen
 
+            # E2 (item 12, log-and-replay): drain sampled pruned candidates to pruned_sample.csv.
+            # Appended every generation (independent of the fronts stride) so no sample is lost.
+            # This is logging only — it reads counters/state, never mutates n_computed/timing.
+            if getattr(ev, 'pruned_samples', None):
+                results_io.append_pruned_samples(self.config.results_dir, ev.pruned_samples)
+
             # reset per-generation evaluator state after writing
             if hasattr(ev, 'clear_dominated_solutions'):
                 ev.clear_dominated_solutions()
+            if hasattr(ev, 'clear_pruned_samples'):
+                ev.clear_pruned_samples()
             if hasattr(ev, 'reset_diagnostics'):
                 ev.reset_diagnostics()
 

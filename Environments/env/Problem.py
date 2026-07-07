@@ -34,7 +34,7 @@ class Problem_py(ElementwiseProblem):
     """
     def __init__(self, case_study, models, objectives, lower_bound=None, lower_bound_quantile=0,
                  traffic_cache_size=200_000, schedule_surrogate_quantile=0.5,
-                 surrogate_noise=0.0, count_false_pruning=False, seed=0):
+                 surrogate_noise=0.0, count_false_pruning=False, false_pruning_log_prob=0.0, seed=0):
         # start with loading the requisite data
         input_data = load_input_data(case_study, models)
         self.case_study = case_study
@@ -50,6 +50,10 @@ class Problem_py(ElementwiseProblem):
         # predictions, and the diagnostic flag read by the evaluators to count false pruning.
         self.surrogate_noise = surrogate_noise
         self.count_false_pruning = count_false_pruning
+        # E2 (item 12, log-and-replay variant): per-pruned-candidate sampling probability for the
+        # metric-neutral false-pruning logger (read by LowerBoundEvaluator._record_dominated_solution).
+        # 0.0 = off; >0 logs (x, front-snapshot) without any exact eval, for post-hoc replay.
+        self.false_pruning_log_prob = false_pruning_log_prob
         self.seed_value = seed
 
         input_data['general']['years'] = int(input_data['general']['time periods'] / input_data['general']['time periods per year'])

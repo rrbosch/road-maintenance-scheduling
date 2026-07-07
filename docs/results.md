@@ -31,6 +31,8 @@ supported** — overhaul item 7.)
 | `fronts.csv` | Long format `generation,<obj0>,<obj1>` — the raw Pareto fronts, so any metric / reference point can be recomputed offline. Logged every `Config.fronts_log_interval` generations (default 10) plus the **final** front, since the full cumulative front written every generation dominated a run's on-disk size; set `fronts_log_interval=1` for the legacy every-generation behavior. Trajectory plots just sample more coarsely; final-state metrics are exact. |
 | `final_solutions.csv` | `sol_idx, x0..xN` — start-time vectors of the latest front (feeds the E3 schedule/Gantt interpretation). |
 | `surrogate.csv` | One row per regressor retrain: `n_computed, quantile, mape, pinball_loss, model` (the surrogate-accuracy learning curve). `model` is `component` (PLBE per-scenario lower bound) or `schedule` (the item-11 whole-schedule baseline). |
+| `pruned_sample.csv` | **Only when `false_pruning_log_prob > 0`** (E2 / item 12 log-and-replay). One row per *sampled* LB/surrogate-pruned candidate: `sample_id, generation, x0..xN` (the pruned decision vector). Logged metric-neutrally during the run (no exact eval); replayed post-hoc by `analysis/false_pruning.py`. |
+| `pruned_sample_fronts.csv` | Companion to `pruned_sample.csv` (same condition): long format `sample_id, point_idx, f0..fM` — the incumbent Pareto-front objective vectors snapshotted at each sampled prune, joined back on `sample_id`. |
 | `algo.pkl` | Rolling pickle for crash-safe resume, written atomically (temp + `os.replace`). |
 | `output_log.txt` | Per-run log (when launched via `run_single_instance.py`). |
 
@@ -66,3 +68,22 @@ For each experiment directory it:
 > `results_processing2.py` / `results_processing_old.py` are not part of this published repo;
 > `analysis/` ports their figures.) Figure-styling polish (color keys, fonts, E3 Gantts) is tracked
 > separately as overhaul item 13.
+
+### False-pruning rate (E2 / item 12, log-and-replay)
+
+For runs that logged a `pruned_sample.csv` (i.e. dispatched with `false_pruning_log_prob > 0`):
+
+```bash
+python analysis/false_pruning.py "Experiments/<experiment_dir>" ["Experiments/<another>" ...]
+```
+
+For each such run it instantiates the *same* `Problem_py` (cached per case study), exact-evaluates
+every sampled pruned `x` via the same `Problem.evaluate` path the run uses, and tests whether the
+true `F(x)` is non-dominated by that sample's recorded incumbent front (`find_non_dominated`,
+mirroring the inline `count_false_pruning` check). It writes `false_pruning.csv` (per-run +
+per-config + overall rows, each with a Wilson 95% CI; a one-sided 95% upper bound when zero false
+prunes are observed) and a short `false_pruning_summary.txt` under `analysis/output/<experiment>/`.
+Samples whose true `F` is infeasible (non-finite) are excluded from the denominator — pruning an
+infeasible candidate is never a mistake. This is the **metric-neutral, scalable** complement to the
+inline `count_false_pruning` mode (which corrupts `n_computed`/iterations/timing and is too expensive
+on large instances).
