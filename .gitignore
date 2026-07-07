@@ -19,6 +19,16 @@ temp/
 Experiments/
 analysis/output/
 plots/
+
+# Downloaded Snellius logs (local landing folders; nothing in-repo writes here)
+/hpc log/
+/logs/
+hpc/logs/
+
+# Active dispatch slot — ephemeral copy of a registry_e<N>.json (submit_array.sh reads this).
+# The canonical experiment registries hpc/registry_e{1,2,3,4}.json ARE tracked; this working
+# copy is not (copy the one you want to run into it — see hpc/README.txt).
+hpc/registry.json
 /other/
 /results_processing/
 /results_processing_rerun/
@@ -43,12 +53,20 @@ Environments/env/*.png
 /_ul
 /to_do_experiments2.json
 /myfirstbash.sh
+# Throwaway convenience runner (the B&B solver lives in Src/Algorithms/ and runs via a registry).
+/run_sf12_bnb.py
+# Stray run/debug logs
+*.log
 
 # Excluded from the public repo: not needed to reproduce experiments (kept on disk).
 # Internal AI-assistant guidance / empty stub / unused label map.
 /CLAUDE.md
 /tno_dtp_api.py
 /legend.json
+# Claude-maintained campaign tracker / working notes (not needed to reproduce experiments).
+/EXPERIMENTS.md
+# Internal collaboration document (model technical report shared with partners).
+/MODEL_TECHNICAL_REPORT.md
 # Legacy post-hoc analysis & plotting, superseded by the analysis/ package.
 /results_processing2.py
 /results_processing_old.py

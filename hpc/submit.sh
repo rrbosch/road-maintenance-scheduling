@@ -36,7 +36,7 @@
 #SBATCH --time=24:00:00
 #SBATCH --output=hpc/logs/slurm_%j.out
 #SBATCH --error=hpc/logs/slurm_%j.err
-#SBATCH --mail-type=START,END,FAIL
+#SBATCH --mail-type=BEGIN,END,FAIL
 #SBATCH --mail-user=robbert.bosch@pm.me
 
 module load 2023

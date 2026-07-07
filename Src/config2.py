@@ -53,6 +53,14 @@ class Config:
         #    (costs extra sims — for a few seeds only).
         self.surrogate_noise = 0.0
         self.count_false_pruning = False
+        # E2 (item 12, log-and-replay variant) false-pruning sampling probability. With probability
+        # X in (0, 1] each LB/surrogate-pruned candidate is *logged only* (decision vector + the
+        # incumbent front snapshot at prune time) to pruned_sample.csv — NO exact evaluation, NO
+        # traffic sim, NO cache touch — so run metrics are byte-identical with it on vs off. The
+        # false-pruning rate is estimated post-hoc by analysis/false_pruning.py. 0.0 = off (default).
+        # Complementary to count_false_pruning (which measures inline at the cost of corrupting
+        # n_computed/iterations/timing); this one is metric-neutral and scales to large instances.
+        self.false_pruning_log_prob = 0.0
         self.objectives = {'SL', 'TTD'}
         self.callback = 'OperatorSuccessCallback'
         self.start_time = datetime.now()
@@ -110,7 +118,8 @@ class Config:
             problem = Problem_py(self.case_study, self.sims, self.objectives, self.lower_bound,
                                  self.lower_bound_quantile, self.traffic_cache_size,
                                  self.schedule_surrogate_quantile, surrogate_noise=self.surrogate_noise,
-                                 count_false_pruning=self.count_false_pruning, seed=self.algo_seed)
+                                 count_false_pruning=self.count_false_pruning,
+                                 false_pruning_log_prob=self.false_pruning_log_prob, seed=self.algo_seed)
         else:
             raise KeyError
         return problem

@@ -529,7 +529,10 @@ class TrafficNetwork:
 
             gap = (TSTT / SPTT) - 1
             if gap < 0:
-                print(f"Error, gap is {gap}. It should never be less than 0.")
+                # Tiny negative gaps are floating-point noise near convergence; gap = 99 forces
+                # another iteration. The message is a debug aid, not an error, so keep it verbose-only.
+                if verbose:
+                    print(f"Error, gap is {gap}. It should never be less than 0.")
                 gap = 99
             elif verbose:
                 print(f'iter={iteration_number}, alpha={round(alpha, 5)}, gap={round(gap, 5)}')
@@ -578,19 +581,28 @@ class TrafficNetwork:
                 self.edge_capacity[edge_idx] *= CRIPPLE_CAPACITY_FACTOR
 
 
-def plot_traffic_network(network: TrafficNetwork, output_path=None, format='png', add_traffic=True):
+def plot_traffic_network(network: TrafficNetwork, output_path=None, format='png', add_traffic=True,
+                         base_edges=None):
     """
     Plot function for TrafficNetworkCFW that works with array-based data.
+
+    Draws links colored by the congestion ratio (realized / free-flow travel time; green = 1,
+    red >= 2) with width proportional to flow, plus a colorbar and a flow-width legend (R1.8).
 
     Args:
         network: TrafficNetworkCFW instance
         output_path: Optional path to save the plot
         format: Image format for saving
+        base_edges: Optional set of directed (from, to) node-id tuples of a *baseline* network.
+            When given, links absent from this network but present in the baseline are drawn as
+            dashed grey ("removed") and links new to this network are overlaid dashed blue
+            ("added"), each with a legend entry — for the topology-variant figures (R1.8).
     """
     import matplotlib.pyplot as plt
     import matplotlib.colors as mcolors
     import matplotlib.cm as cm
     import networkx as nx
+    from matplotlib.lines import Line2D
 
     # Create a temporary NetworkX graph for plotting (visualization only)
     G = nx.DiGraph()
@@ -628,16 +640,17 @@ def plot_traffic_network(network: TrafficNetwork, output_path=None, format='png'
     # Compute visual attributes
     node_size = 100
 
-    # Edge color: congestion level (or dark grey if under renovation)
-    ratios = [G[u][v]['cost'] / G[u][v]['fft'] - 1 for u, v in G.edges()]
-    norm = mcolors.Normalize(vmin=0, vmax=2)
-    colormap = cm.get_cmap('RdYlGn_r')
+    # Edge color: congestion ratio (realized / free-flow travel time), green = 1 -> red >= 2
+    # (matches the manuscript caption); dark grey if under renovation.
+    ratios = [G[u][v]['cost'] / G[u][v]['fft'] for u, v in G.edges()]
+    norm = mcolors.Normalize(vmin=1.0, vmax=2.0)
+    colormap = plt.colormaps['RdYlGn_r']
     edge_colors = []
     for i, (u, v) in enumerate(G.edges()):
         if G[u][v].get('under_renovation', False):
             edge_colors.append('darkgrey')
         else:
-            edge_colors.append(colormap(norm(ratios[i])))
+            edge_colors.append(colormap(norm(min(ratios[i], 2.0))))
 
     # Edge width: flow
     flows = [G[u][v]['flow'] for u, v in G.edges()]
@@ -656,6 +669,27 @@ def plot_traffic_network(network: TrafficNetwork, output_path=None, format='png'
         arrowsize=8,
         node_size=node_size,
     )
+
+    # Topology-difference overlays vs. a baseline network (for the variant figures, R1.8)
+    legend_handles, legend_labels = [], []
+    if base_edges is not None:
+        base_edges = set(base_edges)
+        current = set(G.edges())
+        removed = base_edges - current
+        added = current - base_edges
+        for (u, v) in removed:
+            if u in pos and v in pos:
+                ax.plot([pos[u][0], pos[v][0]], [pos[u][1], pos[v][1]],
+                        color='0.45', lw=1.4, ls=(0, (4, 3)), zorder=0.5)
+        for (u, v) in added:
+            ax.plot([pos[u][0], pos[v][0]], [pos[u][1], pos[v][1]],
+                    color='#0033aa', lw=2.2, ls=(0, (4, 3)), zorder=3.5, alpha=0.9)
+        if removed:
+            legend_handles.append(Line2D([0], [0], color='0.45', lw=1.4, ls=(0, (4, 3))))
+            legend_labels.append('link removed (vs. base)')
+        if added:
+            legend_handles.append(Line2D([0], [0], color='#0033aa', lw=2.2, ls=(0, (4, 3))))
+            legend_labels.append('link added (vs. base)')
 
     nx.draw_networkx_nodes(
         G, pos, ax=ax,
@@ -676,6 +710,22 @@ def plot_traffic_network(network: TrafficNetwork, output_path=None, format='png'
     ax.set_axis_off()
     if add_traffic:
         ax.set_title(f'TTT = {network.cost:.2e} (CFW)')
+
+    # Color key (R1.8): congestion-ratio colorbar + flow-width legend
+    sm = cm.ScalarMappable(norm=norm, cmap=colormap)
+    sm.set_array([])
+    cbar = fig.colorbar(sm, ax=ax, fraction=0.045, pad=0.02,
+                        ticks=[1.0, 1.25, 1.5, 1.75, 2.0])
+    cbar.ax.set_yticklabels(['1.0', '1.25', '1.5', '1.75', r'$\geq$2.0'])
+    cbar.ax.tick_params(labelsize=7)
+    cbar.set_label('travel-time ratio (realized / free-flow)', fontsize=8)
+
+    for lw, lab in [(1.0, 'low flow'), (2.5, 'medium flow'), (4.0, 'high flow')]:
+        legend_handles.append(Line2D([0], [0], color='black', lw=lw))
+        legend_labels.append(lab)
+    ax.legend(legend_handles, legend_labels, loc='upper center', bbox_to_anchor=(0.5, -0.01),
+              ncol=min(4, len(legend_handles)), fontsize=7, framealpha=0.9,
+              borderaxespad=0.2, handlelength=2.2, columnspacing=1.2)
 
     fig.tight_layout()
     if output_path is not None:

@@ -117,6 +117,43 @@ def append_surrogate(result_dir, rows):
     pd.DataFrame(rows).to_csv(sur_path, mode='a', header=not path.exists(sur_path), index=False)
 
 
+def append_pruned_samples(result_dir, samples):
+    """Append sampled LB/surrogate-pruned candidates for post-hoc false-pruning replay (item 12).
+
+    ``samples`` is a list of dicts ``{sample_id, iteration, X (1-D array), front_F (2-D array)}``
+    produced by ``LowerBoundEvaluator._maybe_log_pruned_sample`` (logging only — no exact eval).
+    Two companion CSVs, keyed by ``sample_id``, are appended so the front snapshot (variable number
+    of points) serializes cleanly alongside the fixed-width decision vector:
+
+      ``pruned_sample.csv``        one row per sample: ``sample_id, generation, x0..xN``
+      ``pruned_sample_fronts.csv`` long format: ``sample_id, point_idx, f0..fM`` (the incumbent
+                                   front objective vectors at prune time)
+
+    ``analysis/false_pruning.py`` joins them on ``sample_id`` to replay each prune. Appended (not
+    rewritten) so resume keeps accumulating; the monotone ``sample_id`` keeps rows globally unique.
+    """
+    if not samples:
+        return
+    x_rows = []
+    front_rows = []
+    for s in samples:
+        x = np.asarray(s['X']).ravel()
+        row = {'sample_id': int(s['sample_id']), 'generation': s['iteration']}
+        row.update({f'x{i}': int(v) for i, v in enumerate(x)})
+        x_rows.append(row)
+        front = np.atleast_2d(np.asarray(s['front_F'], dtype=float))
+        for j, fvec in enumerate(front):
+            frow = {'sample_id': int(s['sample_id']), 'point_idx': j}
+            frow.update({f'f{k}': float(val) for k, val in enumerate(fvec)})
+            front_rows.append(frow)
+
+    x_path = path.join(result_dir, 'pruned_sample.csv')
+    pd.DataFrame(x_rows).to_csv(x_path, mode='a', header=not path.exists(x_path), index=False)
+    if front_rows:
+        f_path = path.join(result_dir, 'pruned_sample_fronts.csv')
+        pd.DataFrame(front_rows).to_csv(f_path, mode='a', header=not path.exists(f_path), index=False)
+
+
 def write_generation(result_dir, config, algo, generation, log, F, X, objective_names,
                      surrogate_rows=(), write_fronts=True):
     """Persist everything for one generation: config (once), pickle, fronts, final X, progress.
